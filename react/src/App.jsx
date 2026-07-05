@@ -1,6 +1,7 @@
-import SovereignVMEngine from './SovereignVMEngine.jsx'
-import './App.css'
+import SovereignVMEngine from './SovereignVMEngine'
 
-export default function App() {
+function App() {
   return <SovereignVMEngine />
 }
+
+export default App
