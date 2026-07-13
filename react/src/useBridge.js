@@ -7,6 +7,8 @@ export function useBridge(mode, addLog) {
   const [connected, setConnected] = useState(false);
   const [points, setPoints] = useState([]);
   const [bridgeStats, setBridgeStats] = useState(null);
+  const [devices, setDevices] = useState({ total: 0, connected: 0, devices: [] });
+  const [fleet, setFleet] = useState({ fleet_id: null, self_id: null, mesh: null });
   const wsRef = useRef(null);
   const modeRef = useRef(mode);
   const reconnectRef = useRef(null);
@@ -47,7 +49,23 @@ export function useBridge(mode, addLog) {
 
           if (data.event === "status") {
             setBridgeStats(data.stats || null);
-            addLog(`[BRIDGE] UDP:${data.udp_port} clients:${data.clients}`);
+            if (data.devices) setDevices(data.devices);
+            setFleet({
+              fleet_id: data.fleet_id || null,
+              self_id: data.self_id || null,
+              mesh: data.mesh || null,
+            });
+            const mesh = data.mesh || {};
+            addLog(
+              `[BRIDGE] UDP:${data.udp_port} fleet:${data.fleet_id || "local"} peers:${mesh.peers_up ?? "?"}/${mesh.peers_total ?? "?"}`
+            );
+          } else if (data.event === "devices") {
+            setDevices({
+              total: data.total || 0,
+              connected: data.connected || 0,
+              devices: data.devices || [],
+              fleet_id: data.fleet_id,
+            });
           } else if (data.event === "mode" && data.ok) {
             addLog(`[MODE] Backend set to ${data.mode.toUpperCase()}`);
           } else if (data.event === "pong") {
@@ -84,5 +102,5 @@ export function useBridge(mode, addLog) {
     send({ cmd: "set_mode", mode });
   }, [mode, send]);
 
-  return { connected, points, bridgeStats, send };
+  return { connected, points, bridgeStats, devices, fleet, send };
 }
