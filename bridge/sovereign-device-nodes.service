@@ -1,0 +1,15 @@
+[Unit]
+Description=Sovereign VM Engine — Local Device Mesh Nodes
+After=network.target telemetry-bridge.service
+Wants=telemetry-bridge.service
+
+[Service]
+Type=simple
+User=droid
+WorkingDirectory=/home/droid/sovereign-engine/bridge
+ExecStart=/usr/bin/python3 /home/droid/sovereign-engine/bridge/device_nodes.py
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
