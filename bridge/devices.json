@@ -1,0 +1,100 @@
+{
+  "hub": {
+    "id": "pixel-10",
+    "hostname": "debian",
+    "user": "droid",
+    "role": "field_node",
+    "fleet_id": "04901-command",
+    "lan_ip": "10.142.54.167",
+    "tailscale_ip": null,
+    "anchor": {
+      "lat": 44.552,
+      "lon": -69.6317,
+      "label": "Waterville ME 04901"
+    },
+    "ports": {
+      "udp_ingest": 2368,
+      "websocket": 8765,
+      "ui": 5173
+    },
+    "paths": {
+      "home": "/home/droid",
+      "engine": "/home/droid/sovereign-engine",
+      "fleet": "/home/droid/sovereign-engine/bridge/fleet.json",
+      "grok": "/home/droid/.grok"
+    },
+    "links": {
+      "github_user": "https://github.com/keithdickey207",
+      "github_engine": "https://github.com/keithdickey207/sovereign-engine",
+      "blueprint": "https://docs.google.com/document/d/1X0hYMPzz40A6je6Staa1nSAbjuDyiPXr99ZggVY69mE/edit",
+      "drive_odyssey": "https://drive.google.com/drive/folders/1QaO08Vh7fIz1yE8KSw6S3wSdknQ49SpA"
+    },
+    "last_synced_utc": "2026-07-13T16:28:08Z",
+    "sources": {
+      "blueprint": "https://docs.google.com/document/d/1X0hYMPzz40A6je6Staa1nSAbjuDyiPXr99ZggVY69mE/edit",
+      "github_engine": "https://github.com/keithdickey207/sovereign-engine"
+    }
+  },
+  "devices": [
+    {
+      "id": "pixel-10",
+      "label": "Pixel 10 Field Node",
+      "type": "gnss",
+      "role": "field_node",
+      "host": "self",
+      "description": "This handset \u2014 Linux debian env + local bridge + fleet shipper",
+      "lan_ip": "10.142.54.167"
+    },
+    {
+      "id": "desktop",
+      "label": "Desktop Command Hub",
+      "type": "hub",
+      "role": "primary_hub",
+      "host": "tailscale",
+      "ip": "100.95.99.98",
+      "description": "Primary workstation hub (gods-eye / bridge)"
+    },
+    {
+      "id": "laptop",
+      "label": "Laptop Command Hub",
+      "type": "hub",
+      "role": "secondary_hub",
+      "host": "tailscale",
+      "ip": "100.125.221.112",
+      "description": "Secondary workstation hub"
+    },
+    {
+      "id": "penguin",
+      "label": "Penguin Storage",
+      "type": "storage",
+      "role": "storage",
+      "host": "tailscale",
+      "ip": "100.76.55.82",
+      "description": "Mesh storage / photo archive peer"
+    },
+    {
+      "id": "gnss-01",
+      "label": "GNSS Base",
+      "type": "gnss",
+      "role": "sensor",
+      "host": "local",
+      "description": "Local simulated GNSS reference"
+    },
+    {
+      "id": "lidar-01",
+      "label": "LiDAR Scanner",
+      "type": "lidar",
+      "role": "sensor",
+      "host": "local",
+      "description": "Local simulated LiDAR"
+    },
+    {
+      "id": "rf-01",
+      "label": "RF Mesh Node",
+      "type": "rf",
+      "role": "sensor",
+      "host": "local",
+      "description": "Local simulated RF sensor"
+    }
+  ]
+}
