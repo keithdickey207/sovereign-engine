@@ -1,0 +1,185 @@
+{
+  "fleet_id": "04901-command",
+  "version": "1.0.0",
+  "anchor": {
+    "lat": 44.552,
+    "lon": -69.6317,
+    "alt_m": 33,
+    "label": "Waterville ME 04901",
+    "command_id": "04901_command"
+  },
+  "blueprint": {
+    "name": "Sovereign Earth Engine Master Blueprint Package",
+    "version": "5.0",
+    "date": "2026-07-09",
+    "drive_doc_id": "1X0hYMPzz40A6je6Staa1nSAbjuDyiPXr99ZggVY69mE",
+    "drive_url": "https://docs.google.com/document/d/1X0hYMPzz40A6je6Staa1nSAbjuDyiPXr99ZggVY69mE/edit",
+    "ports": {
+      "ws_ui": 8765,
+      "http_ui": 5173,
+      "udp_gnss": 2368,
+      "udp_rf": 2370,
+      "udp_lwir": 2371,
+      "udp_defense": 2372,
+      "ollama": 11434
+    }
+  },
+  "operator": {
+    "name": "Keith Alan Dickey",
+    "org": "Waterville Software Development Services (WSDS)",
+    "studio": "04901 Studio",
+    "github": "keithdickey207",
+    "email": "keithdickey207@gmail.com"
+  },
+  "mesh_strategy": {
+    "preferred_transport": "tailscale",
+    "fallback_transport": "lan",
+    "heartbeat_sec": 5,
+    "peer_probe_sec": 15,
+    "stale_sec": 45,
+    "primary_hub": "desktop",
+    "secondary_hub": "laptop",
+    "field_nodes": [
+      "pixel-10"
+    ],
+    "note": "All field nodes fan-out UDP to every reachable hub. Hubs may also run local UI+bridge."
+  },
+  "hosts": [
+    {
+      "id": "desktop",
+      "label": "Desktop Command Hub",
+      "role": "primary_hub",
+      "kind": "workstation",
+      "user": "keithdickey207",
+      "paths": {
+        "projects": "~/projects",
+        "engine": "~/projects/sovereign-engine",
+        "earth": "~/projects/sovereign-earth"
+      },
+      "tailscale_ip": "100.95.99.98",
+      "lan_ip": null,
+      "ports": {
+        "ui": 5174,
+        "ws": 8765,
+        "udp_gnss": 2368
+      },
+      "services": [
+        "telemetry_bridge",
+        "gods-eye",
+        "ollama"
+      ],
+      "notes": "Historical TAILSCALE_IP from live-node / gods-eye v6"
+    },
+    {
+      "id": "laptop",
+      "label": "Laptop Command Hub",
+      "role": "secondary_hub",
+      "kind": "workstation",
+      "user": "keithdickey207",
+      "paths": {
+        "projects": "~/projects",
+        "engine": "~/projects/sovereign-engine"
+      },
+      "tailscale_ip": "100.125.221.112",
+      "lan_ip": null,
+      "ports": {
+        "ui": 5173,
+        "ws": 8765,
+        "udp_gnss": 2368
+      },
+      "services": [
+        "telemetry_bridge",
+        "gods-eye",
+        "vite"
+      ],
+      "notes": "gods-eye.html on :5173 in shell history"
+    },
+    {
+      "id": "penguin",
+      "label": "Penguin Storage / Mesh Peer",
+      "role": "storage",
+      "kind": "nas_or_workstation",
+      "user": "keithdickey207",
+      "tailscale_ip": "100.76.55.82",
+      "lan_ip": null,
+      "ports": {
+        "ssh": 22
+      },
+      "services": [
+        "ssh",
+        "photo_archive"
+      ],
+      "notes": "rsync target for Pixel photos (DCIM \u2192 ~/photos)"
+    },
+    {
+      "id": "pixel-10",
+      "label": "Pixel 10 Field Node",
+      "role": "field_node",
+      "kind": "phone_linux",
+      "user": "droid",
+      "hostname": "debian",
+      "paths": {
+        "home": "/home/droid",
+        "engine": "/home/droid/sovereign-engine",
+        "rover": "/home/droid/pixel_rover.py",
+        "fleet": "/home/droid/sovereign-engine/bridge/fleet.json"
+      },
+      "tailscale_ip": null,
+      "lan_ip": "10.142.54.167",
+      "ports": {
+        "ui": 5173,
+        "ws": 8765,
+        "udp_gnss": 2368
+      },
+      "services": [
+        "telemetry_bridge",
+        "device_nodes",
+        "vite",
+        "pixel_shipper"
+      ],
+      "device_ids": [
+        "pixel-10",
+        "gnss-01",
+        "lidar-01",
+        "rf-01"
+      ],
+      "notes": "This device \u2014 Android16 Debian environment. Joins fleet via Tailscale + ships GNSS to hubs."
+    }
+  ],
+  "sources": {
+    "blueprint_drive": {
+      "name": "Sovereign Earth Engine Master Blueprint Package v5.0",
+      "doc_id": "1X0hYMPzz40A6je6Staa1nSAbjuDyiPXr99ZggVY69mE",
+      "url": "https://docs.google.com/document/d/1X0hYMPzz40A6je6Staa1nSAbjuDyiPXr99ZggVY69mE/edit",
+      "date": "2026-07-09"
+    },
+    "github": {
+      "user": "keithdickey207",
+      "engine": "https://github.com/keithdickey207/sovereign-engine",
+      "earth": "https://github.com/keithdickey207/sovereign-earth",
+      "grid": "https://github.com/keithdickey207/District_04901_Grid"
+    },
+    "drive_notes": {
+      "run_commands": "https://docs.google.com/document/d/1z8d6HhpjNcjQwr0OAcQk99w6kfhwTtww_5JOEqvjyF8/edit",
+      "gods_eye_urls": "https://docs.google.com/document/d/1UsQiw9IkrjDEqSYt0yfvMmLB44g8aIE85nUJcz8fvlQ/edit",
+      "hub_payload_note": "https://docs.google.com/document/d/1QZvgXHFUjLXoJ5XhIIWJINQNGvWW3SSGlmzyUlAqFkg/edit",
+      "odyssey": "https://docs.google.com/document/d/1vUp1KYYidXEM3r_iGLqs7rpGGAgmymZ7YMIWiZnJIBY/edit"
+    },
+    "gemini": {
+      "cve_api_sketch": "https://drive.google.com/file/d/1JkEBzmQXnftyybufLTKpSdTmvfSiAOmD/view",
+      "role": "hub R&D only \u2014 not run on Pixel field node"
+    },
+    "grok_on_pixel": {
+      "sessions_cwd": "/home/droid/.grok/sessions",
+      "titles": [
+        "Integrate Game Engine into Device Codebase",
+        "Connect All Devices for Digital Twin Integration",
+        "Configure Pixel Device as Distributed System Node",
+        "Handle Update Request in Codebase Context",
+        "Update Pixel Environment from Drive Grok Gemini Git History"
+      ]
+    },
+    "last_synced_utc": "2026-07-13T22:02:58Z",
+    "this_node": "pixel-10"
+  }
+}
