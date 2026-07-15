@@ -1,8 +1,9 @@
-# Sovereign Earth Engine v3
+# Sovereign Earth Engine — Command Dashboard
 
-Global defense & ISR command center — satellite tracking, RF/light spectrum, wire detection, OSM buildings, towns, cities, and countries. Waterville ME 04901 anchor.
+**React global disaster-response & ISR command center** — part of **Sovereign Earth Engine Blueprint v5.0**.
 
-**Keith Alan Dickey** — WSDS / 04901 Studio
+Waterville ME **04901** command anchor · 44.5520°N, −69.6317°W  
+**Keith Alan Dickey** — WSDS / 04901 Studio · MIT License
 
 ## License
 
@@ -14,22 +15,43 @@ MIT License — see [LICENSE](LICENSE).
 
 ```bash
 bash start-earth.sh
+# optional: --offline | --daemon | --no-fetch | --prefetch
 ```
 
-Open **http://localhost:5173**
+Open **http://localhost:5173** · WebSocket **ws://localhost:8765**
 
-## Repos in this stack
+Banner: **SOVEREIGN EARTH ENGINE** (platform Blueprint **v5.0**).
 
-| Repo | Role |
-|------|------|
-| [sovereign-engine](https://github.com/keithdickey207/sovereign-engine) | React global map UI + launcher |
-| [sovereign-earth](https://github.com/keithdickey207/sovereign-earth) | Planetary ISR + neural mesh core |
-| [District_04901_Grid](https://github.com/keithdickey207/District_04901_Grid) | WebSocket bridge, RF, buildings, wires |
+## Stack
 
-## Features
+| Repo | Role | Status |
+|------|------|--------|
+| [sovereign-engine](https://github.com/keithdickey207/sovereign-engine) | This repo — React UI + launcher | LIVE |
+| [sovereign-earth](https://github.com/keithdickey207/sovereign-earth) | ISR + neural + domains + **platform_manifest** | LIVE |
+| [District_04901_Grid](https://github.com/keithdickey207/District_04901_Grid) | Bridge, RF, buildings, **disaster_sim** | LIVE |
+| sovereign-defense | DEFCON + air defense | LIVE |
+| GNS (galactic flight / time nav) | Space cinema / nav / Pixel GNSS | LIVE |
+| 04901-digital-twin | custom sovereign spatial twin | LIVE |
 
-- Live satellite & maritime tracking
-- RF + optical light frequency spectrum (7 RF + 8 light bands)
+**Authority docs:** `~/projects/sovereign-earth/docs/BLUEPRINT_PACKAGE_2026-07-09/`  
+**Counts / ports / locations:** `~/projects/sovereign-earth/config/platform_manifest.json`  
+**Location status:** `~/projects/sovereign-earth/config/location_status.json`
+
+## Features (audit-corrected)
+
+- Live satellite & maritime tracking (catalog / sim)
+- RF + optical spectrum: **21 RF + 19 light** bands
 - Wire detection (OSM power lines + EM signatures)
-- 40 cities, 20 towns, 20 countries + dynamic OSM buildings
-- Click-to-scan human/animal ISR fusion
+- Geographic catalog: **60 cities · 64 towns · 34 countries** + OSM buildings
+- Area **207** disaster modes (9 including `none`) + critical infrastructure stress
+- Energy: **93** NRC plants live path · Maine grid **1,076** facilities
+- Click-to-scan human/animal ISR fusion · DEFCON / air defense layers
+- Local AI Ops (Ollama optional)
+
+## Game-engine surfaces (related)
+
+| Surface | Tech |
+|---------|------|
+| This dashboard | React Sovereign Earth Engine |
+| Spatial digital twin | Sovereign Spatial 04901 Digital Twin |
+| Space cinema / nav | GNS Python engine |
