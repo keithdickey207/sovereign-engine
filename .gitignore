@@ -1,25 +1,31 @@
-# Python
-venv/
+node_modules/
+react/node_modules/
 __pycache__/
 *.py[cod]
-*.egg-info/
-.pytest_cache/
-
-# Node
-react/node_modules/
-react/dist/
-react/.env
-react/.env.local
-
-# Vite
-.vite/
-
-# OS / editor
+.venv/
+venv/
+dist/
+build/
+.env
+.env.*
+*.log
 .DS_Store
-*.swp
+logs/
+.earth-pids
+.bridge-only.pid
+cache/
+tile-cache/
+*.gguf
+data/*.bsp
 .idea/
 .vscode/
-
-# Logs
-*.log
-npm-debug.log*
+*.swp
+*.swo
+*.backup
+*.save
+data/ops/
+*.jsonl
+react/public/tile-cache/
+react/dist/
+public/photos/
+photos/
