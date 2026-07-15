@@ -1,8 +1,7 @@
 {
-  "name": "sovereign-vm-ui",
+  "name": "react",
   "private": true,
-  "version": "0.1.0",
-  "license": "MIT",
+  "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
