@@ -1,0 +1,58 @@
+{
+  "name": "God's Eye 7.2 — Sovereign COP",
+  "short_name": "God's Eye 7.2",
+  "description": "Keith Alan Dickey · God's Eye 7.2 — Tailscale mesh multi-sensor COP for desk, Pixel, and all peers. Defensive / rescue only.",
+  "id": "/gods-eye.html?v=7.2.0",
+  "start_url": "/gods-eye.html?v=7.2.0",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui", "browser"],
+  "orientation": "any",
+  "background_color": "#03080c",
+  "theme_color": "#0b3d2e",
+  "lang": "en",
+  "categories": ["utilities", "productivity"],
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Sensor Paint",
+      "url": "/gods-eye.html?v=7.2.0#paint",
+      "description": "Live multi-sensor paint at home"
+    },
+    {
+      "name": "Earth Map",
+      "url": "/",
+      "description": "Global Earth engine map"
+    },
+    {
+      "name": "Paper",
+      "url": "/papers/",
+      "description": "Theoretical paper — copy into Google Docs"
+    }
+  ]
+}

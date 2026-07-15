@@ -1,0 +1,63 @@
+{
+  "type": "hub_laptop_link",
+  "version": "7.2-own",
+  "ts": 1784093307.695083,
+  "iso": "2026-07-15T05:28:27Z",
+  "synced": true,
+  "hub": {
+    "node_id": "penguin",
+    "ip": "100.125.221.112",
+    "online": true,
+    "wire": "7.2-own",
+    "services": {
+      "wire": true,
+      "ui": true,
+      "mesh": true,
+      "defense": true,
+      "via_ts_ui": true,
+      "via_ts_wire": true
+    },
+    "urls": {
+      "earth": "http://100.125.221.112:5173/",
+      "gods_eye": "http://100.125.221.112:5173/gods-eye.html?v=7.2.1",
+      "interconnect": "http://100.125.221.112:5173/interconnect.html?v=7.2.1",
+      "photo_live": "http://100.125.221.112:5173/photo-live.html?v=7.2.1",
+      "own_wire": "http://100.125.221.112:8765/health",
+      "paint": "http://100.125.221.112:8765/location_paint"
+    }
+  },
+  "laptop": {
+    "node_id": "keithdickey207-1",
+    "ip": "100.95.99.98",
+    "online": true,
+    "wire": "6.1",
+    "services": {
+      "wire": true,
+      "ui": true,
+      "defense": false,
+      "hub": true
+    },
+    "rtt_ms": {
+      "ui": 126.6,
+      "wire": 220.9
+    },
+    "open_for_full_sync": {
+      "earth_hub": "http://100.125.221.112:5173/?peer=laptop&node=keithdickey207-1",
+      "interconnect": "http://100.125.221.112:5173/interconnect.html?v=7.2.1&join=keithdickey207-1",
+      "gods_eye": "http://100.125.221.112:5173/gods-eye.html?v=7.2.1",
+      "local_ui_still_up": "http://100.95.99.98:5173/"
+    }
+  },
+  "link": {
+    "register_hub": true,
+    "register_laptop": true,
+    "mesh_join": true,
+    "mode": "hub_source_of_truth",
+    "doctrine": "laptop UI \u2192 hub own wire for COP; local laptop stack is peer/viewer"
+  },
+  "how": {
+    "on_hub_desktop": "http://127.0.0.1:5173/",
+    "on_laptop_browser": "http://100.125.221.112:5173/interconnect.html?v=7.2.1",
+    "note": "Open hub URLs on BOTH screens for identical live COP. Laptop local :5173 can stay up as secondary."
+  }
+}
