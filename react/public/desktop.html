@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>God's Eye · Desktop Hub</title>
+  <style>
+    body { margin:0; min-height:100vh; display:grid; place-items:center;
+      background:#05080c; color:#e6eef8; font-family:system-ui,sans-serif; }
+    .card { max-width:560px; padding:28px; border:1px solid rgba(52,211,153,.25);
+      border-radius:16px; background:rgba(10,18,28,.95); }
+    h1 { margin:0 0 8px; color:#34d399; font-size:20px; }
+    p { color:#7a90a8; line-height:1.5; }
+    a.btn { display:block; margin:10px 0; padding:14px 16px; border-radius:12px;
+      background:#0b3d2e; color:#7dffb3; text-decoration:none; border:1px solid rgba(52,211,153,.45);
+      font-weight:600; }
+    a.btn.secondary { background:transparent; color:#5eb3ff; border-color:rgba(94,179,255,.3); }
+    a.btn.primary { background:#134e3a; font-size:1.05rem; }
+    .ok { color:#34d399; font-family:ui-monospace,monospace; font-size:12px; }
+    .warn { color:#fbbf24; font-family:ui-monospace,monospace; font-size:12px; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>God's Eye · This Desktop</h1>
+    <p>Hub is <b>penguin</b> on this Dell OptiPlex. <b>Local interconnect only</b> — no paid mesh platforms.</p>
+    <p class="ok" id="h">checking…</p>
+    <a class="btn primary" href="/interconnect.html?v=7.2.1">Open Interconnect (all devices)</a>
+    <a class="btn" href="/gods-eye.html?v=7.2.1">Open God's Eye COP</a>
+    <a class="btn secondary" href="/god-mode.html?v=7.2.1">God Mode</a>
+    <a class="btn secondary" href="/photo-live.html?v=7.2.1">Photo Live</a>
+    <a class="btn secondary" href="http://127.0.0.1:8767/status">Mesh bridge :8767</a>
+    <a class="btn secondary" href="http://127.0.0.1:5090/">Command Hub :5090</a>
+  </div>
+  <script>
+    const el = document.getElementById('h');
+    Promise.all([
+      fetch('http://127.0.0.1:8765/health',{cache:'no-store'}).then(r=>r.json()).catch(()=>null),
+      fetch('http://127.0.0.1:8767/status',{cache:'no-store'}).then(r=>r.json()).catch(()=>null),
+      fetch('/mesh-live.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.json()).catch(()=>null),
+    ]).then(([wire, bridge, mesh])=>{
+      const online = (bridge && bridge.devices || mesh && mesh.devices || [])
+        .filter(d => d.online || d.reachable)
+        .map(d => d.node_id || d.name)
+        .join(', ') || '—';
+      const usb = (bridge && bridge.devices || []).filter(d => String(d.link||'').includes('usb') || d.usb_product);
+      const pixel = usb.map(d => d.usb_product || d.node_id).join(', ') || 'not on USB';
+      if (wire && (wire.status==='ok' || wire.service)) {
+        el.textContent = `OWN WIRE OK · mesh: ${online} · USB: ${pixel}`;
+        el.className = 'ok';
+      } else {
+        el.textContent = 'Wire not reachable — start: bash ~/bin/sov-mesh-bridge start && bash ~/start-gods-eye.sh';
+        el.className = 'warn';
+      }
+    });
+  </script>
+</body>
+</html>
