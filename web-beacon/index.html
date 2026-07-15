@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>04901 SOVEREIGN BEACON</title>
+    <style>
+        body { background: #000; color: #0f0; font-family: monospace; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
+        .data { margin: 10px; padding: 10px; border: 1px solid #0f0; }
+    </style>
+</head>
+<body>
+    <h1>04901 SOVEREIGN BEACON</h1>
+    <div id="status">STATUS: DISCONNECTED</div>
+    <div class="data" id="gnss">GNSS: Standby</div>
+    <div class="data" id="imu">IMU: Standby</div>
+
+    <script>
+        const TARGET_WS = 'ws://100.125.221.112:8765';
+        const ws = new WebSocket(TARGET_WS);
+        const statusEl = document.getElementById('status');
+
+        ws.onopen = () => statusEl.innerText = "STATUS: UPLINK ACTIVE";
+        ws.onclose = () => statusEl.innerText = "STATUS: UPLINK LOST";
+
+        // GNSS STREAM
+        navigator.geolocation.watchPosition((pos) => {
+            const data = { node: "pixel_10_alpha", type: "gnss", lat: pos.coords.latitude, lon: pos.coords.longitude };
+            document.getElementById('gnss').innerText = `LAT: ${pos.coords.latitude.toFixed(4)} LON: ${pos.coords.longitude.toFixed(4)}`;
+            if(ws.readyState === WebSocket.OPEN) ws.send(JSON.stringify(data));
+        }, (err) => console.error(err), { enableHighAccuracy: true });
+
+        // IMU STREAM
+        window.addEventListener('devicemotion', (event) => {
+            const acc = event.acceleration;
+            if(!acc.x) return;
+            const data = { node: "pixel_10_alpha", type: "imu", x: acc.x, y: acc.y, z: acc.z };
+            document.getElementById('imu').innerText = `X: ${acc.x.toFixed(2)} Y: ${acc.y.toFixed(2)}`;
+            if(ws.readyState === WebSocket.OPEN) ws.send(JSON.stringify(data));
+        });
+    </script>
+</body>
+</html>
