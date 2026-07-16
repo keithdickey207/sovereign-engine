@@ -13,6 +13,12 @@ if [[ "${SOVEREIGN_USE_WS_BRIDGE:-0}" == "1" ]]; then
 else
   BRIDGE="$DISTRICT_ROOT/bridge/sovereign_own_wire.py"
   BRIDGE_LABEL="OWN WIRE HTTP+SSE+SHM (no websockets pkg)"
+  # Fall back if own-wire file is missing (older clones / partial sync)
+  if [[ ! -f "$BRIDGE" ]]; then
+    echo "[!] Missing $BRIDGE — falling back to district_bridge.py"
+    BRIDGE="$DISTRICT_ROOT/bridge/district_bridge.py"
+    BRIDGE_LABEL="FOREIGN WS bridge (auto-fallback)"
+  fi
 fi
 EARTH_ROOT="$HOME/projects/sovereign-earth"
 DEFENSE_ROOT="$HOME/projects/sovereign-defense"
