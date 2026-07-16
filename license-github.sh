@@ -272,12 +272,31 @@ for entry in "${REPOS[@]}"; do
 
   create_repo_if_missing "$slug" "$visibility" "$desc"
 
+  # Pull remote first so push is never rejected (diverged histories)
+  git fetch origin 2>/dev/null || true
+  if git show-ref --verify --quiet refs/remotes/origin/main; then
+    if ! git merge-base --is-ancestor origin/main HEAD 2>/dev/null; then
+      echo "  [merge] integrating origin/main..."
+      if ! git merge origin/main --allow-unrelated-histories -X ours --no-edit \
+           -m "merge: integrate origin/main before stack push (${YEAR})" 2>/dev/null; then
+        git diff --name-only --diff-filter=U 2>/dev/null | while read -r f; do
+          git checkout --ours -- "$f" 2>/dev/null || true
+          git add -- "$f" 2>/dev/null || true
+        done
+        git commit -m "merge: resolve preferring local stack (${YEAR})" 2>/dev/null || true
+      fi
+    fi
+  fi
+
   # Avoid committing huge/local-only trees
   git add LICENSE README.md .gitignore SEE_STACK.md 2>/dev/null || true
   git add -A
 
-  # Unstage common heavy paths if they snuck in
-  git reset HEAD -- node_modules tile-cache __pycache__ .venv venv 2>/dev/null || true
+  # Unstage common heavy / runtime paths if they snuck in
+  git reset HEAD -- \
+    node_modules tile-cache __pycache__ .venv venv \
+    logs '*.log' data/ cache/ tile-cache/ .earth-pids \
+    2>/dev/null || true
 
   if git diff --cached --quiet 2>/dev/null; then
     echo "  [skip] nothing to commit"
@@ -296,7 +315,17 @@ for entry in "${REPOS[@]}"; do
     echo "  [pushed] https://github.com/${slug}"
     echo "  [license] https://github.com/${slug}/blob/main/LICENSE"
   else
-    echo "  [warn] push failed for ${slug} — check auth / remote"
+    # One more attempt: fetch + merge + push
+    echo "  [retry] fetch/merge then push..."
+    git fetch origin 2>/dev/null || true
+    git merge origin/main --allow-unrelated-histories -X ours --no-edit \
+      -m "merge: retry integrate origin/main (${YEAR})" 2>/dev/null || true
+    if git push -u origin main 2>&1; then
+      echo "  [pushed] https://github.com/${slug}"
+      echo "  [license] https://github.com/${slug}/blob/main/LICENSE"
+    else
+      echo "  [warn] push failed for ${slug} — check auth / remote"
+    fi
   fi
 done
 
