@@ -1,0 +1,293 @@
+{
+  "type": "transit_map_pack",
+  "version": "7.2-FULL-LIVE",
+  "status": "LIVE",
+  "ts": 1784522597.1769054,
+  "iso": "2026-07-20T04:43:17Z",
+  "ok": true,
+  "doctrine": "DEFENSIVE / RESCUE / LOCAL-FIRST",
+  "domains": [
+    "missiles",
+    "energy",
+    "neural",
+    "mesh",
+    "global",
+    "celestial",
+    "airport",
+    "trains",
+    "mapping",
+    "military",
+    "life",
+    "satellite",
+    "atc",
+    "ports",
+    "municipal"
+  ],
+  "all_layers_on": true,
+  "sensor_layers": {
+    "rf": true,
+    "thermal": true,
+    "life": true,
+    "defense": true,
+    "sar": true,
+    "spectrum": true,
+    "lattice": true,
+    "paint": true,
+    "photos": true,
+    "airport": true,
+    "satellite": true,
+    "power": true,
+    "nasa": true,
+    "god_mode": true,
+    "energy": true,
+    "military": true,
+    "fleet": true,
+    "map": true,
+    "trains": true,
+    "rail": true,
+    "mapping": true,
+    "missiles": true,
+    "neural": true,
+    "mesh": true,
+    "global": true,
+    "celestial": true,
+    "orbital": true,
+    "space": true,
+    "air": true,
+    "atc": true,
+    "ports": true,
+    "comms": true,
+    "human": true,
+    "animal": true,
+    "earth": true,
+    "moon": true,
+    "sun": true,
+    "ar": true,
+    "vr": true,
+    "quest": true
+  },
+  "feed_switches": {
+    "paint": true,
+    "devices": true,
+    "god": true,
+    "defense_feed": true,
+    "air": true,
+    "energy": true,
+    "neural": true,
+    "sat": true,
+    "airport": true,
+    "photos": true,
+    "power": true,
+    "military": true,
+    "fleet": true,
+    "map": true,
+    "llm": true,
+    "mesh": true,
+    "missiles": true,
+    "trains": true,
+    "global": true,
+    "celestial": true,
+    "orbital": true,
+    "atc": true,
+    "ports": true,
+    "life": true,
+    "sar": true,
+    "spectrum": true
+  },
+  "map": {
+    "center": {
+      "lat": 44.552,
+      "lon": -69.6317,
+      "zip": "04901",
+      "label": "Waterville ME"
+    },
+    "all_layers_on": true,
+    "layers": {
+      "airport": {
+        "live": true,
+        "count": 16,
+        "primary": "KWVL",
+        "tracks": 19
+      },
+      "atc": {
+        "live": true,
+        "tracks": 19,
+        "sectors": [
+          "KWVL_TWR",
+          "BGR_APP",
+          "ZBW_CTR"
+        ]
+      },
+      "trains": {
+        "live": true,
+        "count": 9,
+        "corridor": "maine_central_csx"
+      },
+      "missiles": {
+        "live": true,
+        "tracks": 1,
+        "defense_nodes": 2,
+        "doctrine": "defensive_ew_only"
+      },
+      "military": {
+        "live": true,
+        "branches": 10,
+        "sites": 22
+      },
+      "energy": {
+        "live": true,
+        "grid_health": "nominal",
+        "nodes": 4
+      },
+      "power": {
+        "live": true,
+        "grid_health": "nominal"
+      },
+      "neural": {
+        "type": "neural_arenas",
+        "live": true,
+        "ts": 1784522597.1769054,
+        "arenas": {
+          "A": {
+            "purpose": "Sensor Ingestion",
+            "llm_role": "ops",
+            "live": true
+          },
+          "B": {
+            "purpose": "Spatial Twin (ECI)",
+            "llm_role": "navigation",
+            "live": true
+          },
+          "C": {
+            "purpose": "Forensic Audit",
+            "llm_role": "gods_eye",
+            "live": true
+          },
+          "D": {
+            "purpose": "Cognitive Logic",
+            "llm_role": "code",
+            "live": true
+          },
+          "E": {
+            "purpose": "Orbital/Sync Frame-Lock",
+            "llm_role": "medical",
+            "live": true
+          }
+        },
+        "roles": [
+          "ops",
+          "medical",
+          "gods_eye",
+          "navigation",
+          "code"
+        ],
+        "ollama": false,
+        "models": []
+      },
+      "mesh": {
+        "live": true,
+        "shm": "/dev/shm/sovereign_mesh",
+        "desk_mesh": "7.2"
+      },
+      "global": {
+        "live": true,
+        "nodes": 16,
+        "scope": "world_cop"
+      },
+      "celestial": {
+        "live": true,
+        "sats": 8,
+        "moon": true,
+        "sun": true,
+        "earth": true
+      },
+      "satellite": {
+        "live": true,
+        "isr": true,
+        "leo": true,
+        "count": 8
+      },
+      "nasa": {
+        "live": true
+      },
+      "life": {
+        "live": true,
+        "human": 60,
+        "animal": 56
+      },
+      "municipal": {
+        "live": true,
+        "zip": "04901",
+        "count": 35
+      },
+      "ports": {
+        "live": true,
+        "services": 13
+      },
+      "mapping": {
+        "live": true,
+        "ar": true,
+        "vr": true,
+        "quest": true
+      },
+      "air": {
+        "live": true,
+        "defense": true,
+        "tracks": 3
+      }
+    },
+    "marker_count": 73
+  },
+  "packs_summary": {
+    "airport": {
+      "type": "airport_traffic",
+      "live": true,
+      "count": 19
+    },
+    "military": {
+      "type": "military_fleet_defensive",
+      "live": true,
+      "count": 13
+    },
+    "missiles": {
+      "type": "missile_watch",
+      "live": true,
+      "count": 1
+    },
+    "air_defense": {
+      "type": "air_defense",
+      "live": true,
+      "count": 3
+    },
+    "celestial": {
+      "type": "celestial",
+      "live": true,
+      "count": 8
+    },
+    "life": {
+      "type": "life_isr_global",
+      "live": true,
+      "count": 60
+    },
+    "municipal": {
+      "type": "municipal_04901",
+      "live": true,
+      "count": 35
+    },
+    "ports": {
+      "type": "port_network_comms",
+      "live": true,
+      "count": 0
+    },
+    "neural": {
+      "type": "neural_arenas",
+      "live": true,
+      "count": 0
+    },
+    "ui": {
+      "type": "user_interfaces",
+      "live": true,
+      "count": 0
+    }
+  }
+}
