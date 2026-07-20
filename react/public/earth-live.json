@@ -1,0 +1,43 @@
+{
+  "type": "earth_live_overview",
+  "status": "LIVE",
+  "hub": "100.125.221.112",
+  "earth": {
+    "live": true,
+    "gods_eye_http": 200,
+    "paint_live": true,
+    "device_count": 29,
+    "active_count": 26,
+    "building": "16 Kelsey Street \u2014 Home Lab",
+    "lat": 44.5612083,
+    "lon": -69.6323149,
+    "own_wire": "ok",
+    "own_wire_version": "7.2-own",
+    "defense": "ok",
+    "mesh_bridge": "mesh_bridge"
+  },
+  "urls": {
+    "gods_eye": "http://100.125.221.112:5173/gods-eye.html",
+    "earth": "http://100.125.221.112:5173/",
+    "interconnect": "http://100.125.221.112:5173/interconnect.html",
+    "mesh_live": "http://100.125.221.112:5173/mesh-live.json",
+    "own_wire_paint": "http://100.125.221.112:8765/location_paint",
+    "own_wire_health": "http://100.125.221.112:8765/health",
+    "mesh_bridge": "http://100.125.221.112:8767/status",
+    "defense": "http://100.125.221.112:8787/health",
+    "command_hub": "http://100.125.221.112:5090/"
+  },
+  "urls_gateway": {
+    "gods_eye": "http://127.0.0.1:43173/gods-eye.html",
+    "earth": "http://127.0.0.1:43173/",
+    "interconnect": "http://127.0.0.1:43173/interconnect.html",
+    "mesh_live": "http://127.0.0.1:43173/mesh-live.json",
+    "own_wire_paint": "http://127.0.0.1:48765/location_paint",
+    "own_wire_health": "http://127.0.0.1:48765/health",
+    "mesh_bridge": "http://127.0.0.1:48767/status",
+    "defense": "http://127.0.0.1:48787/health",
+    "command_hub": "http://127.0.0.1:45090/",
+    "gateway": "http://127.0.0.1:43000/"
+  },
+  "updated_at": "2026-07-16T16:07:58.119776+00:00"
+}

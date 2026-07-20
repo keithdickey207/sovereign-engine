@@ -1,0 +1,513 @@
+{
+  "type": "gods_eye_live_overview",
+  "version": "7.2.1-live",
+  "status": "LIVE",
+  "ts": 1784211588.353803,
+  "iso": "2026-07-16T14:19:52.019237+00:00",
+  "hub_ip": "100.125.221.112",
+  "crostini_ip": "100.115.92.201",
+  "token_path": "/a/ByvNa7wZ82b0FeR3l6Ijcs9vB9tGbVJ0",
+  "sensor_layers": {
+    "rf": true,
+    "thermal": true,
+    "life": true,
+    "defense": true,
+    "sar": true,
+    "spectrum": true,
+    "lattice": true,
+    "paint": true,
+    "photos": true,
+    "airport": true,
+    "satellite": true,
+    "power": true,
+    "nasa": true,
+    "god_mode": true
+  },
+  "feed_switches": {
+    "paint": true,
+    "devices": true,
+    "god": true,
+    "defense_feed": true,
+    "air": true,
+    "energy": true,
+    "neural": true,
+    "sat": true,
+    "airport": true,
+    "photos": true,
+    "power": true
+  },
+  "paint": {
+    "live": true,
+    "building": "16 Kelsey Street \u2014 Home Lab",
+    "address": "16 Kelsey Street",
+    "lat": 44.5612083,
+    "lon": -69.6323149,
+    "device_count": 29,
+    "active_count": 25,
+    "life_signals": 11,
+    "photo_live": {
+      "photo_count": 24,
+      "track_count": 32,
+      "life_tracks": 29,
+      "model_n": 177,
+      "latest_stamp": "2026-07-15 12:51:02"
+    },
+    "by_kind": {
+      "phone_ble": 5,
+      "iot_sensor": 6,
+      "tv": 2,
+      "wifi_ap": 1,
+      "phone_cellular": 2,
+      "smart_speaker": 2,
+      "radio_vhf": 1,
+      "smoke_co": 1,
+      "baby_monitor": 1,
+      "phone_wifi": 2,
+      "router": 2,
+      "printer": 1,
+      "radio_uhf": 1,
+      "fax": 1,
+      "radio_ham": 1
+    },
+    "nasa_pipelines": [
+      {
+        "id": "nasa_firms",
+        "label": "NASA FIRMS thermal hotspots",
+        "role": "fire_thermal",
+        "band": "MODIS/VIIRS"
+      },
+      {
+        "id": "nasa_gibs",
+        "label": "NASA GIBS imagery tiles",
+        "role": "optical_context",
+        "band": "visible/IR"
+      },
+      {
+        "id": "nasa_power",
+        "label": "NASA POWER weather",
+        "role": "weather_wind",
+        "band": "meteo"
+      },
+      {
+        "id": "nasa_earthdata",
+        "label": "NASA Earthdata search",
+        "role": "archive_context",
+        "band": "multi"
+      },
+      {
+        "id": "leo_noaa_apt",
+        "label": "NOAA LEO APT weather",
+        "role": "leo_weather",
+        "band": "137 MHz"
+      },
+      {
+        "id": "gns_ephemeris",
+        "label": "GNS / JPL DE421 ephemeris",
+        "role": "space_nav",
+        "band": "astro"
+      },
+      {
+        "id": "sat_isr",
+        "label": "Sovereign satellite ISR tracks",
+        "role": "overhead_isr",
+        "band": "orbital"
+      },
+      {
+        "id": "lwir_local",
+        "label": "Local LWIR thermal UDP",
+        "role": "heat_life",
+        "band": "8\u201314 \u00b5m"
+      }
+    ],
+    "sensor_layers_source": {
+      "rf": false,
+      "thermal": false,
+      "life": false,
+      "defense": false,
+      "sar": false,
+      "spectrum": false,
+      "lattice": false
+    }
+  },
+  "photos": {
+    "live": true,
+    "photo_count": 24,
+    "track_count": 32
+  },
+  "satellite": {
+    "live": true,
+    "pipelines": [
+      "nasa_firms",
+      "nasa_gibs",
+      "nasa_power",
+      "nasa_earthdata",
+      "leo_noaa_apt",
+      "gns_ephemeris",
+      "sat_isr",
+      "lwir_local"
+    ]
+  },
+  "airport": {
+    "live": true,
+    "keys": [
+      "type",
+      "airport",
+      "mode",
+      "live_ok",
+      "live_error",
+      "seq",
+      "ts",
+      "uptime_s"
+    ],
+    "summary": "{\"type\": \"airport\", \"icao\": \"KWVL\", \"name\": \"Waterville Robert LaFleur Airport (WVL)\", \"mode\": \"sim\", \"live_ok\": false, \"track_count\": 5, \"in_terminal\": 5, \"on\u2026",
+    "icao": "KWVL",
+    "track_count": 5,
+    "mode": "sim",
+    "live_ok": false
+  },
+  "god_mode": {
+    "active": true,
+    "persona": "joint_defensive"
+  },
+  "map": {
+    "marker_count": 108,
+    "center": {
+      "lat": 44.5612083,
+      "lon": -69.6323149,
+      "label": "16 Kelsey Street \u2014 Home Lab",
+      "zip": "04901"
+    },
+    "zoom": 17,
+    "layers": [
+      "location_paint",
+      "earth",
+      "defense",
+      "airport",
+      "mesh",
+      "god_mode"
+    ]
+  },
+  "bridges": [
+    {
+      "id": "peer_defense",
+      "live": false,
+      "http": 0,
+      "url": "http://127.0.0.1:8787/health"
+    },
+    {
+      "id": "peer_eye",
+      "live": false,
+      "http": 0,
+      "url": "http://127.0.0.1:8787/a/ByvNa7wZ82b0FeR3l6Ijcs9vB9tGbVJ0/eye"
+    },
+    {
+      "id": "peer_link",
+      "live": false,
+      "http": 0,
+      "url": "http://127.0.0.1:8787/link-devices"
+    },
+    {
+      "id": "peer_bridge",
+      "live": false,
+      "http": 0,
+      "url": "http://127.0.0.1:8765/health"
+    },
+    {
+      "id": "peer_earth",
+      "live": false,
+      "http": 0,
+      "url": "http://127.0.0.1:5173/gods-eye.html"
+    },
+    {
+      "id": "peer_command",
+      "live": true,
+      "http": 200,
+      "url": "http://127.0.0.1:5090/"
+    },
+    {
+      "id": "peer_mesh_ui",
+      "live": true,
+      "http": 200,
+      "url": "http://127.0.0.1:42426/"
+    },
+    {
+      "id": "gw_console",
+      "live": true,
+      "http": 200,
+      "url": "http://127.0.0.1:43000/"
+    },
+    {
+      "id": "gw_earth",
+      "live": true,
+      "http": 200,
+      "url": "http://127.0.0.1:43173/gods-eye.html"
+    },
+    {
+      "id": "gw_defense",
+      "live": true,
+      "http": 200,
+      "url": "http://127.0.0.1:48787/health"
+    },
+    {
+      "id": "gw_paint",
+      "live": true,
+      "http": 200,
+      "url": "http://127.0.0.1:48765/location_paint"
+    },
+    {
+      "id": "gw_photos",
+      "live": true,
+      "http": 200,
+      "url": "http://127.0.0.1:48765/api/photos"
+    },
+    {
+      "id": "gw_god",
+      "live": true,
+      "http": 200,
+      "url": "http://127.0.0.1:48765/god_mode"
+    },
+    {
+      "id": "gw_map",
+      "live": true,
+      "http": 200,
+      "url": "http://127.0.0.1:48787/api/map"
+    },
+    {
+      "id": "gw_status",
+      "live": true,
+      "http": 200,
+      "url": "http://127.0.0.1:48787/api/status"
+    },
+    {
+      "id": "gw_live",
+      "live": true,
+      "http": 200,
+      "url": "http://127.0.0.1:48787/api/live"
+    },
+    {
+      "id": "gw_command",
+      "live": true,
+      "http": 200,
+      "url": "http://127.0.0.1:45090/"
+    },
+    {
+      "id": "gw_mesh",
+      "live": true,
+      "http": 200,
+      "url": "http://127.0.0.1:48767/status"
+    },
+    {
+      "id": "hub_defense",
+      "live": true,
+      "http": 200,
+      "url": "http://100.125.221.112:8787/health"
+    },
+    {
+      "id": "hub_paint",
+      "live": true,
+      "http": 200,
+      "url": "http://100.125.221.112:8765/location_paint"
+    },
+    {
+      "id": "hub_photos",
+      "live": true,
+      "http": 200,
+      "url": "http://100.125.221.112:8765/api/photos"
+    },
+    {
+      "id": "hub_god",
+      "live": true,
+      "http": 200,
+      "url": "http://100.125.221.112:8765/god_mode"
+    },
+    {
+      "id": "hub_earth",
+      "live": true,
+      "http": 200,
+      "url": "http://100.125.221.112:5173/gods-eye.html"
+    },
+    {
+      "id": "hub_command",
+      "live": true,
+      "http": 200,
+      "url": "http://100.125.221.112:5090/"
+    },
+    {
+      "id": "hub_map",
+      "live": true,
+      "http": 200,
+      "url": "http://100.125.221.112:8787/api/map"
+    },
+    {
+      "id": "hub_status",
+      "live": true,
+      "http": 200,
+      "url": "http://100.125.221.112:8787/api/status"
+    },
+    {
+      "id": "hub_live",
+      "live": true,
+      "http": 200,
+      "url": "http://100.125.221.112:8787/api/live"
+    },
+    {
+      "id": "chrome_gateway",
+      "live": true,
+      "http": 200,
+      "url": "http://100.115.92.201:43000/"
+    },
+    {
+      "id": "chrome_fabric",
+      "live": false,
+      "http": 0,
+      "url": "http://100.115.92.201:8787/a/ByvNa7wZ82b0FeR3l6Ijcs9vB9tGbVJ0"
+    },
+    {
+      "id": "chrome_eye",
+      "live": false,
+      "http": 0,
+      "url": "http://100.115.92.201:8787/a/ByvNa7wZ82b0FeR3l6Ijcs9vB9tGbVJ0/eye"
+    },
+    {
+      "id": "chrome_paint",
+      "live": true,
+      "http": 200,
+      "url": "http://100.115.92.201:48765/location_paint"
+    },
+    {
+      "id": "chrome_earth",
+      "live": true,
+      "http": 200,
+      "url": "http://100.115.92.201:43173/gods-eye.html"
+    }
+  ],
+  "bridges_live": 25,
+  "bridges_total": 32,
+  "buttons": [
+    {
+      "id": "gateway",
+      "label": "Gateway console",
+      "url": "http://100.115.92.201:43000/",
+      "group": "overview"
+    },
+    {
+      "id": "fabric",
+      "label": "Fabric cookie",
+      "url": "http://100.115.92.201:8787/a/ByvNa7wZ82b0FeR3l6Ijcs9vB9tGbVJ0",
+      "group": "overview"
+    },
+    {
+      "id": "eye",
+      "label": "Eye map \u00b7 all overlays",
+      "url": "http://100.115.92.201:8787/a/ByvNa7wZ82b0FeR3l6Ijcs9vB9tGbVJ0/eye",
+      "group": "maps"
+    },
+    {
+      "id": "link",
+      "label": "Link devices \u00b7 buttons",
+      "url": "http://100.115.92.201:8787/link-devices",
+      "group": "overview"
+    },
+    {
+      "id": "earth",
+      "label": "Earth COP map",
+      "url": "http://100.115.92.201:43173/gods-eye.html",
+      "group": "maps"
+    },
+    {
+      "id": "paint",
+      "label": "Location paint \u00b7 sensors",
+      "url": "http://100.115.92.201:48765/location_paint",
+      "group": "sensors"
+    },
+    {
+      "id": "photos",
+      "label": "Photos live",
+      "url": "http://100.115.92.201:48765/api/photos",
+      "group": "sensors"
+    },
+    {
+      "id": "god",
+      "label": "God mode",
+      "url": "http://100.115.92.201:48765/god_mode",
+      "group": "maps"
+    },
+    {
+      "id": "map_api",
+      "label": "Map markers API",
+      "url": "http://100.115.92.201:48787/api/map",
+      "group": "maps"
+    },
+    {
+      "id": "status",
+      "label": "Hub status \u00b7 airport \u00b7 sat",
+      "url": "http://100.115.92.201:48787/api/status",
+      "group": "sensors"
+    },
+    {
+      "id": "live",
+      "label": "Live sources",
+      "url": "http://100.115.92.201:48787/api/live",
+      "group": "sensors"
+    },
+    {
+      "id": "command",
+      "label": "Command hub",
+      "url": "http://100.115.92.201:45090/",
+      "group": "overview"
+    },
+    {
+      "id": "quest",
+      "label": "Quest AR/VR",
+      "url": "http://100.115.92.201:8787/a/ByvNa7wZ82b0FeR3l6Ijcs9vB9tGbVJ0/quest",
+      "group": "arvr"
+    },
+    {
+      "id": "quest_god",
+      "label": "Quest God Mode",
+      "url": "http://100.115.92.201:8787/a/ByvNa7wZ82b0FeR3l6Ijcs9vB9tGbVJ0/quest-god-mode",
+      "group": "arvr"
+    },
+    {
+      "id": "mesh",
+      "label": "Mesh console",
+      "url": "http://100.115.92.201:42426/",
+      "group": "bridges"
+    },
+    {
+      "id": "bridge_ws",
+      "label": "Local bridge WS",
+      "url": "http://100.115.92.201:8765/health",
+      "group": "bridges"
+    },
+    {
+      "id": "earth_local",
+      "label": "Earth local Vite",
+      "url": "http://100.115.92.201:5173/gods-eye.html",
+      "group": "maps"
+    },
+    {
+      "id": "hub_direct_paint",
+      "label": "Dell paint direct",
+      "url": "http://100.125.221.112:8765/location_paint",
+      "group": "bridges"
+    },
+    {
+      "id": "hub_direct_earth",
+      "label": "Dell earth direct",
+      "url": "http://100.125.221.112:5173/gods-eye.html",
+      "group": "bridges"
+    }
+  ],
+  "open_order": [
+    "http://100.115.92.201:43000/",
+    "http://100.115.92.201:8787/a/ByvNa7wZ82b0FeR3l6Ijcs9vB9tGbVJ0",
+    "http://100.115.92.201:8787/a/ByvNa7wZ82b0FeR3l6Ijcs9vB9tGbVJ0/eye",
+    "http://100.115.92.201:8787/link-devices",
+    "http://100.115.92.201:43173/gods-eye.html",
+    "http://100.115.92.201:48765/location_paint",
+    "http://100.115.92.201:48765/api/photos",
+    "http://100.115.92.201:48765/god_mode"
+  ],
+  "doctrine": "DEFENSIVE / RESCUE / LOCAL-FIRST \u00b7 all layers ON"
+}
