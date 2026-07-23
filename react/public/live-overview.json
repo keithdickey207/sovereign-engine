@@ -2,11 +2,11 @@
   "type": "gods_eye_live_overview",
   "version": "7.2.1-live",
   "status": "LIVE",
-  "ts": 1784211588.353803,
-  "iso": "2026-07-16T14:19:52.019237+00:00",
+  "ts": 1784680632.2526283,
+  "iso": "2026-07-22T00:38:25.697264+00:00",
   "hub_ip": "100.125.221.112",
   "crostini_ip": "100.115.92.201",
-  "token_path": "/a/ByvNa7wZ82b0FeR3l6Ijcs9vB9tGbVJ0",
+  "token_path": "/a/gUv6muuqxC5iqD5qg0sr0e1Il3s6LxM0",
   "sensor_layers": {
     "rf": true,
     "thermal": true,
@@ -21,7 +21,11 @@
     "satellite": true,
     "power": true,
     "nasa": true,
-    "god_mode": true
+    "god_mode": true,
+    "energy": true,
+    "military": true,
+    "fleet": true,
+    "map": true
   },
   "feed_switches": {
     "paint": true,
@@ -43,15 +47,9 @@
     "lat": 44.5612083,
     "lon": -69.6323149,
     "device_count": 29,
-    "active_count": 25,
+    "active_count": 22,
     "life_signals": 11,
-    "photo_live": {
-      "photo_count": 24,
-      "track_count": 32,
-      "life_tracks": 29,
-      "model_n": 177,
-      "latest_stamp": "2026-07-15 12:51:02"
-    },
+    "photo_live": null,
     "by_kind": {
       "phone_ble": 5,
       "iot_sensor": 6,
@@ -120,19 +118,30 @@
       }
     ],
     "sensor_layers_source": {
-      "rf": false,
-      "thermal": false,
-      "life": false,
-      "defense": false,
-      "sar": false,
-      "spectrum": false,
-      "lattice": false
+      "rf": true,
+      "thermal": true,
+      "life": true,
+      "defense": true,
+      "sar": true,
+      "spectrum": true,
+      "lattice": true,
+      "paint": true,
+      "photos": true,
+      "airport": true,
+      "satellite": true,
+      "power": true,
+      "nasa": true,
+      "god_mode": true,
+      "energy": true,
+      "military": true,
+      "fleet": true,
+      "map": true
     }
   },
   "photos": {
     "live": true,
-    "photo_count": 24,
-    "track_count": 32
+    "photo_count": 3,
+    "track_count": 3
   },
   "satellite": {
     "live": true,
@@ -147,75 +156,50 @@
       "lwir_local"
     ]
   },
-  "airport": {
-    "live": true,
-    "keys": [
-      "type",
-      "airport",
-      "mode",
-      "live_ok",
-      "live_error",
-      "seq",
-      "ts",
-      "uptime_s"
-    ],
-    "summary": "{\"type\": \"airport\", \"icao\": \"KWVL\", \"name\": \"Waterville Robert LaFleur Airport (WVL)\", \"mode\": \"sim\", \"live_ok\": false, \"track_count\": 5, \"in_terminal\": 5, \"on\u2026",
-    "icao": "KWVL",
-    "track_count": 5,
-    "mode": "sim",
-    "live_ok": false
-  },
+  "airport": null,
   "god_mode": {
-    "active": true,
-    "persona": "joint_defensive"
+    "active": null,
+    "persona": null
   },
   "map": {
-    "marker_count": 108,
+    "marker_count": 163,
     "center": {
-      "lat": 44.5612083,
-      "lon": -69.6323149,
-      "label": "16 Kelsey Street \u2014 Home Lab",
-      "zip": "04901"
+      "lat": 44.552,
+      "lon": -69.632,
+      "zoom": 8
     },
-    "zoom": 17,
-    "layers": [
-      "location_paint",
-      "earth",
-      "defense",
-      "airport",
-      "mesh",
-      "god_mode"
-    ]
+    "zoom": null,
+    "layers": null
   },
   "bridges": [
     {
       "id": "peer_defense",
-      "live": false,
-      "http": 0,
+      "live": true,
+      "http": 200,
       "url": "http://127.0.0.1:8787/health"
     },
     {
       "id": "peer_eye",
-      "live": false,
-      "http": 0,
-      "url": "http://127.0.0.1:8787/a/ByvNa7wZ82b0FeR3l6Ijcs9vB9tGbVJ0/eye"
+      "live": true,
+      "http": 200,
+      "url": "http://127.0.0.1:8787/a/gUv6muuqxC5iqD5qg0sr0e1Il3s6LxM0/eye"
     },
     {
       "id": "peer_link",
-      "live": false,
-      "http": 0,
+      "live": true,
+      "http": 200,
       "url": "http://127.0.0.1:8787/link-devices"
     },
     {
       "id": "peer_bridge",
-      "live": false,
-      "http": 0,
+      "live": true,
+      "http": 200,
       "url": "http://127.0.0.1:8765/health"
     },
     {
       "id": "peer_earth",
-      "live": false,
-      "http": 0,
+      "live": true,
+      "http": 200,
       "url": "http://127.0.0.1:5173/gods-eye.html"
     },
     {
@@ -274,8 +258,8 @@
     },
     {
       "id": "gw_status",
-      "live": true,
-      "http": 200,
+      "live": false,
+      "http": 0,
       "url": "http://127.0.0.1:48787/api/status"
     },
     {
@@ -292,62 +276,62 @@
     },
     {
       "id": "gw_mesh",
-      "live": true,
-      "http": 200,
+      "live": false,
+      "http": 404,
       "url": "http://127.0.0.1:48767/status"
     },
     {
       "id": "hub_defense",
-      "live": true,
-      "http": 200,
+      "live": false,
+      "http": 0,
       "url": "http://100.125.221.112:8787/health"
     },
     {
       "id": "hub_paint",
-      "live": true,
-      "http": 200,
+      "live": false,
+      "http": 0,
       "url": "http://100.125.221.112:8765/location_paint"
     },
     {
       "id": "hub_photos",
-      "live": true,
-      "http": 200,
+      "live": false,
+      "http": 0,
       "url": "http://100.125.221.112:8765/api/photos"
     },
     {
       "id": "hub_god",
-      "live": true,
-      "http": 200,
+      "live": false,
+      "http": 0,
       "url": "http://100.125.221.112:8765/god_mode"
     },
     {
       "id": "hub_earth",
-      "live": true,
-      "http": 200,
+      "live": false,
+      "http": 0,
       "url": "http://100.125.221.112:5173/gods-eye.html"
     },
     {
       "id": "hub_command",
-      "live": true,
-      "http": 200,
+      "live": false,
+      "http": 0,
       "url": "http://100.125.221.112:5090/"
     },
     {
       "id": "hub_map",
-      "live": true,
-      "http": 200,
+      "live": false,
+      "http": 0,
       "url": "http://100.125.221.112:8787/api/map"
     },
     {
       "id": "hub_status",
-      "live": true,
-      "http": 200,
+      "live": false,
+      "http": 0,
       "url": "http://100.125.221.112:8787/api/status"
     },
     {
       "id": "hub_live",
-      "live": true,
-      "http": 200,
+      "live": false,
+      "http": 0,
       "url": "http://100.125.221.112:8787/api/live"
     },
     {
@@ -358,15 +342,15 @@
     },
     {
       "id": "chrome_fabric",
-      "live": false,
-      "http": 0,
-      "url": "http://100.115.92.201:8787/a/ByvNa7wZ82b0FeR3l6Ijcs9vB9tGbVJ0"
+      "live": true,
+      "http": 200,
+      "url": "http://100.115.92.201:8787/a/gUv6muuqxC5iqD5qg0sr0e1Il3s6LxM0"
     },
     {
       "id": "chrome_eye",
-      "live": false,
-      "http": 0,
-      "url": "http://100.115.92.201:8787/a/ByvNa7wZ82b0FeR3l6Ijcs9vB9tGbVJ0/eye"
+      "live": true,
+      "http": 200,
+      "url": "http://100.115.92.201:8787/a/gUv6muuqxC5iqD5qg0sr0e1Il3s6LxM0/eye"
     },
     {
       "id": "chrome_paint",
@@ -381,7 +365,7 @@
       "url": "http://100.115.92.201:43173/gods-eye.html"
     }
   ],
-  "bridges_live": 25,
+  "bridges_live": 21,
   "bridges_total": 32,
   "buttons": [
     {
@@ -393,13 +377,13 @@
     {
       "id": "fabric",
       "label": "Fabric cookie",
-      "url": "http://100.115.92.201:8787/a/ByvNa7wZ82b0FeR3l6Ijcs9vB9tGbVJ0",
+      "url": "http://100.115.92.201:8787/a/gUv6muuqxC5iqD5qg0sr0e1Il3s6LxM0",
       "group": "overview"
     },
     {
       "id": "eye",
       "label": "Eye map \u00b7 all overlays",
-      "url": "http://100.115.92.201:8787/a/ByvNa7wZ82b0FeR3l6Ijcs9vB9tGbVJ0/eye",
+      "url": "http://100.115.92.201:8787/a/gUv6muuqxC5iqD5qg0sr0e1Il3s6LxM0/eye",
       "group": "maps"
     },
     {
@@ -459,13 +443,13 @@
     {
       "id": "quest",
       "label": "Quest AR/VR",
-      "url": "http://100.115.92.201:8787/a/ByvNa7wZ82b0FeR3l6Ijcs9vB9tGbVJ0/quest",
+      "url": "http://100.115.92.201:8787/a/gUv6muuqxC5iqD5qg0sr0e1Il3s6LxM0/quest",
       "group": "arvr"
     },
     {
       "id": "quest_god",
       "label": "Quest God Mode",
-      "url": "http://100.115.92.201:8787/a/ByvNa7wZ82b0FeR3l6Ijcs9vB9tGbVJ0/quest-god-mode",
+      "url": "http://100.115.92.201:8787/a/gUv6muuqxC5iqD5qg0sr0e1Il3s6LxM0/quest-god-mode",
       "group": "arvr"
     },
     {
@@ -501,8 +485,8 @@
   ],
   "open_order": [
     "http://100.115.92.201:43000/",
-    "http://100.115.92.201:8787/a/ByvNa7wZ82b0FeR3l6Ijcs9vB9tGbVJ0",
-    "http://100.115.92.201:8787/a/ByvNa7wZ82b0FeR3l6Ijcs9vB9tGbVJ0/eye",
+    "http://100.115.92.201:8787/a/gUv6muuqxC5iqD5qg0sr0e1Il3s6LxM0",
+    "http://100.115.92.201:8787/a/gUv6muuqxC5iqD5qg0sr0e1Il3s6LxM0/eye",
     "http://100.115.92.201:8787/link-devices",
     "http://100.115.92.201:43173/gods-eye.html",
     "http://100.115.92.201:48765/location_paint",

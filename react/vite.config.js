@@ -155,6 +155,16 @@ export default defineConfig({
             '/ArcGIS/rest/services/World_Imagery/MapServer/tile/$1/$2/$3',
           ),
       },
+      // Esri reference labels (for hybrid sat+labels)
+      '/tiles/labels': {
+        target: 'https://server.arcgisonline.com',
+        changeOrigin: true,
+        rewrite: (path) =>
+          path.replace(
+            /^\/tiles\/labels\/(\d+)\/(\d+)\/(\d+)/,
+            '/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/$1/$2/$3',
+          ),
+      },
       // Esri Clarity
       '/tiles/clarity': {
         target: 'https://clarity.maptiles.arcgis.com',
@@ -184,6 +194,16 @@ export default defineConfig({
         target: 'https://tile.openstreetmap.org',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/tiles\/osm/, ''),
+      },
+      // NASA GIBS VIIRS true-color (near-realtime) — /tiles/gibs/{date}/{z}/{y}/{x}.jpg
+      '/tiles/gibs': {
+        target: 'https://gibs.earthdata.nasa.gov',
+        changeOrigin: true,
+        rewrite: (path) =>
+          path.replace(
+            /^\/tiles\/gibs\/(\d{4}-\d{2}-\d{2})\/(\d+)\/(\d+)\/(\d+)\.jpg$/,
+            '/wmts/epsg3857/best/VIIRS_SNPP_CorrectedReflectance_TrueColor/default/$1/GoogleMapsCompatible_Level9/$2/$3/$4.jpg',
+          ),
       },
       // Local / offline = prefetched tile-cache (same middleware path)
       // Browser hits /tiles/local/z/x/y.png → rewritten to /tiles/cache/street/...

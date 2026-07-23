@@ -29,9 +29,12 @@ function buildHttpBases(preferred) {
   const pagePort = window.location.port || "";
   const originPort = pagePort && pagePort !== "80" && pagePort !== "443" ? `:${pagePort}` : "";
   const isLocal = host === "localhost" || host === "127.0.0.1";
+  // Crostini eth0 — ChromeOS Chrome can reach this; Dell LAN hub often offline
+  const CROSTINI = "100.115.92.201";
+  const TS_PEER = "100.95.99.98";
   const list = [];
   if (preferred) list.push(preferred.replace(/^ws/i, "http").replace(/\/$/, ""));
-  // same-origin vite proxies
+  // same-origin vite proxies (preferred when Earth is open on :5173)
   if (window.location.protocol.startsWith("http")) {
     list.push(`${window.location.protocol}//${host}${originPort}/own-wire`);
     list.push(`${window.location.protocol}//${host}:5173/own-wire`);
@@ -40,9 +43,16 @@ function buildHttpBases(preferred) {
     list.push(`http://127.0.0.1:${DEFAULT_PORT}`);
     list.push(`http://localhost:${DEFAULT_PORT}`);
   } else {
+    // Same host as the page (Crostini IP or Tailscale peer IP)
     list.push(`${window.location.protocol}//${host}:${DEFAULT_PORT}`);
   }
-  // Local LAN hub (Chrome OS Wi‑Fi) — no paid mesh
+  // Red laptop failover (live engines when Dell is offline)
+  list.push(`http://${CROSTINI}:${DEFAULT_PORT}`);
+  list.push(`http://${CROSTINI}:5173/own-wire`);
+  list.push(`http://${CROSTINI}:48765`); // hub-gateway paint proxy
+  list.push(`http://${TS_PEER}:${DEFAULT_PORT}`);
+  list.push(`http://${TS_PEER}:5173/own-wire`);
+  // Local LAN hub (desktop) — last; often offline away from desk
   list.push(`http://${LAN_HUB}:${DEFAULT_PORT}`);
   list.push(`http://${LAN_HUB}:5173/own-wire`);
   const seen = new Set();

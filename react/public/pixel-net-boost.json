@@ -1,0 +1,197 @@
+{
+  "type": "pixel_net_boost",
+  "version": "1.0.0-live",
+  "ts": "2026-07-21T03:00:11.614100+00:00",
+  "live": true,
+  "placeholders": false,
+  "unlimited_plan": true,
+  "throttle_bypass": false,
+  "throttle_honest": "Unlimited plan: optimize peak rate/latency. Cannot force carrier priority if the tower deprioritizes congested users.",
+  "preferred_path": "prefer_wifi_or_hotspot_5ghz",
+  "pixel": {
+    "tailscale_ip": "100.64.22.60",
+    "path": {
+      "online": false,
+      "direct": true,
+      "latency_ms": 119.0,
+      "via": "direct_or_peer",
+      "relay": "nyc",
+      "active": false,
+      "rx": 0,
+      "tx": 0,
+      "cur_addr": "nyc",
+      "ping_raw": "pong from keiths-pixel (100.64.22.60) via 192.168.18.36:37048 in 119ms"
+    }
+  },
+  "band_scores": [
+    {
+      "freq_mhz": 5180.0,
+      "power": 0.65,
+      "label": "WiFi 5 GHz \u00b7 WiFi phone / handset",
+      "role": "wifi_local",
+      "score": 0.65,
+      "advice": "Prefer Wi\u2011Fi / hotspot on 5 GHz when available; 2.4 is crowded",
+      "live": true
+    },
+    {
+      "freq_mhz": 1575.42,
+      "power": 0.7,
+      "label": "GNSS L1",
+      "role": "gnss",
+      "score": 0.63,
+      "advice": "GNSS only \u2014 not data",
+      "live": true
+    },
+    {
+      "freq_mhz": 2412.0,
+      "power": 0.55,
+      "label": "WiFi/BLE 2.4 GHz \u00b7 Bluetooth handset / wearable",
+      "role": "wifi_local",
+      "score": 0.55,
+      "advice": "Prefer Wi\u2011Fi / hotspot on 5 GHz when available; 2.4 is crowded",
+      "live": true
+    },
+    {
+      "freq_mhz": 2412.0,
+      "power": 0.55,
+      "label": "WiFi/BLE 2.4 GHz \u00b7 Baby / care monitor",
+      "role": "wifi_local",
+      "score": 0.55,
+      "advice": "Prefer Wi\u2011Fi / hotspot on 5 GHz when available; 2.4 is crowded",
+      "live": true
+    },
+    {
+      "freq_mhz": 2412.0,
+      "power": 0.55,
+      "label": "WiFi/BLE 2.4 GHz \u00b7 WiFi phone / handset",
+      "role": "wifi_local",
+      "score": 0.55,
+      "advice": "Prefer Wi\u2011Fi / hotspot on 5 GHz when available; 2.4 is crowded",
+      "live": true
+    },
+    {
+      "freq_mhz": 155.0,
+      "power": 0.6,
+      "label": "VHF rescue \u00b7 SAR helo stand-by",
+      "role": "other",
+      "score": 0.54,
+      "advice": "Monitor only",
+      "live": true
+    },
+    {
+      "freq_mhz": 155.0,
+      "power": 0.6,
+      "label": "VHF rescue \u00b7 MEDEVAC pad ready",
+      "role": "other",
+      "score": 0.54,
+      "advice": "Monitor only",
+      "live": true
+    },
+    {
+      "freq_mhz": 155.0,
+      "power": 0.6,
+      "label": "VHF rescue \u00b7 Fire/rescue apparatus",
+      "role": "other",
+      "score": 0.54,
+      "advice": "Monitor only",
+      "live": true
+    },
+    {
+      "freq_mhz": 850.0,
+      "power": 0.55,
+      "label": "Cellular / LTE \u00b7 Cellular phone",
+      "role": "lte_low",
+      "score": 0.495,
+      "advice": "Low-band: better range/buildings, often lower peak throughput",
+      "live": true
+    },
+    {
+      "freq_mhz": 155.0,
+      "power": 0.55,
+      "label": "VHF public safety \u00b7 VHF public-safety / scanner",
+      "role": "other",
+      "score": 0.495,
+      "advice": "Monitor only",
+      "live": true
+    },
+    {
+      "freq_mhz": 14.0,
+      "power": 0.55,
+      "label": "HF amateur \u00b7 VHF public-safety / scanner",
+      "role": "other",
+      "score": 0.495,
+      "advice": "Monitor only",
+      "live": true
+    },
+    {
+      "freq_mhz": 462.0,
+      "power": 0.55,
+      "label": "UHF / GMRS \u00b7 UHF tactical / GMRS",
+      "role": "other",
+      "score": 0.495,
+      "advice": "Monitor only",
+      "live": true
+    },
+    {
+      "freq_mhz": 14.0,
+      "power": 0.55,
+      "label": "HF amateur \u00b7 UHF tactical / GMRS",
+      "role": "other",
+      "score": 0.495,
+      "advice": "Monitor only",
+      "live": true
+    },
+    {
+      "freq_mhz": 118.0,
+      "power": 0.5,
+      "label": "Airband \u00b7 WVL Airport",
+      "role": "other",
+      "score": 0.45,
+      "advice": "Monitor only",
+      "live": true
+    },
+    {
+      "freq_mhz": 1575.42,
+      "power": 0.5,
+      "label": "GNSS stamp \u00b7 seed_home",
+      "role": "gnss",
+      "score": 0.45,
+      "advice": "GNSS only \u2014 not data",
+      "live": true
+    },
+    {
+      "freq_mhz": 1575.42,
+      "power": 0.5,
+      "label": "GNSS stamp \u00b7 seed_home_lab",
+      "role": "gnss",
+      "score": 0.45,
+      "advice": "GNSS only \u2014 not data",
+      "live": true
+    }
+  ],
+  "recommendations": [
+    "Strong local Wi\u2011Fi energy \u2014 optional offload for lower latency at home; with unlimited plan you can stay on hotspot if speed is fine.",
+    "Plan mode: UNLIMITED \u2014 optimize for peak rate & latency, not GB saving. Note: some carriers still deprioritize after a soft threshold when the tower is busy (not a hard cap). RF tools cannot force priority over other customers.",
+    "Max-speed hotspot: AP band Prefer 5 GHz; phone plugged in; battery unrestricted for Hotspot + Tailscale; Adaptive connectivity ON; Data saver OFF.",
+    "Clients: Private DNS dns.google or 1.1.1.1; no low-data mode; one VPN max (Tailscale alone is enough for mesh).",
+    "keiths-pixel offline on Tailscale \u2014 turn Tailscale ON for mesh COP + path metrics."
+  ],
+  "linux_tune": {
+    "applied": [],
+    "note": "set SOVEREIGN_NET_TUNE=1 as root to apply buffer tune"
+  },
+  "operator": {
+    "name": "keith",
+    "device": "keiths-pixel",
+    "lat": 44.561208,
+    "lon": -69.632315,
+    "source": "own_wire_paint",
+    "live_fix": true,
+    "tailscale_ip": "100.64.22.60",
+    "waiting_gnss": false
+  },
+  "urls": {
+    "map": "http://100.115.92.201:5173/gods-eye.html",
+    "status_json": "http://100.115.92.201:5173/pixel-net-boost.json"
+  }
+}

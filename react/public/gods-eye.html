@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1" />
+  <meta name="theme-color" content="#0b3d2e" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <title>God's Eye · Live Satellite + Street Map</title>
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <style>
+    :root {
+      --bg: #05080c; --panel: rgba(8,14,22,.94); --line: rgba(52,211,153,.28);
+      --ok: #34d399; --air: #5eb3ff; --muted: #7a90a8; --fg: #e6eef8; --warn: #fb923c;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; height: 100%; background: var(--bg); color: var(--fg);
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; overflow: hidden; }
+    #app { height: 100%; display: grid; grid-template-rows: auto 1fr; }
+    .top {
+      display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+      padding: 8px 10px; background: linear-gradient(180deg, #0c1620, #080e16);
+      border-bottom: 1px solid var(--line); z-index: 1000;
+    }
+    .brand { font-weight: 800; color: var(--ok); letter-spacing: .04em; font-size: 14px; }
+    .brand span { display: block; font-size: 10px; color: var(--muted); font-weight: 500; }
+    .pill {
+      font-size: 10px; padding: 4px 9px; border-radius: 999px; border: 1px solid var(--line);
+      color: var(--muted); font-family: ui-monospace, monospace;
+    }
+    .pill.live { color: var(--ok); border-color: rgba(52,211,153,.45); }
+    .pill.warn { color: var(--warn); }
+    .btns { display: flex; flex-wrap: wrap; gap: 6px; margin-left: auto; }
+    button, .btn {
+      background: #0b3d2e; color: var(--ok); border: 1px solid #1a7a55; border-radius: 10px;
+      padding: 7px 10px; font-size: 11px; font-weight: 700; cursor: pointer;
+    }
+    button.active, button:hover { background: #0f5c40; border-color: var(--ok); }
+    button.sec { background: #0a1624; border-color: rgba(94,179,255,.35); color: var(--air); }
+    #map { width: 100%; height: 100%; background: #02060a; }
+    .leaflet-container { background: #02060a; font: 12px/1.3 system-ui, sans-serif; }
+    .hud {
+      position: absolute; left: 10px; bottom: 18px; z-index: 900; max-width: min(360px, 92vw);
+      background: var(--panel); border: 1px solid var(--line); border-radius: 12px;
+      padding: 10px 12px; backdrop-filter: blur(10px); pointer-events: none;
+    }
+    .hud b { color: var(--ok); }
+    .hud .meta { color: var(--muted); font-size: 11px; font-family: ui-monospace, monospace; margin-top: 4px; }
+    .legend {
+      position: absolute; right: 10px; top: 10px; z-index: 900;
+      background: var(--panel); border: 1px solid var(--line); border-radius: 10px;
+      padding: 8px 10px; font-size: 11px; max-width: 160px;
+    }
+    .legend div { margin: 3px 0; }
+    .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
+    .sat-marker {
+      width: 10px; height: 10px; border-radius: 50%; background: #66ccff;
+      box-shadow: 0 0 8px #66ccff; border: 1px solid #fff;
+    }
+    .home-marker {
+      width: 14px; height: 14px; border-radius: 50%; background: #34d399;
+      box-shadow: 0 0 12px #34d399; border: 2px solid #fff;
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <div class="top">
+    <div class="brand">GOD'S EYE MAP<span>Live satellite · street · hybrid · global</span></div>
+    <span class="pill live" id="pillLive"><span style="color:inherit">●</span> LIVE</span>
+    <span class="pill" id="pillTiles">tiles…</span>
+    <span class="pill" id="pillSats">sats —</span>
+    <span class="pill" id="pillMarks">markers —</span>
+    <div class="btns">
+      <button type="button" class="active" data-base="sat" id="btnSat">Satellite</button>
+      <button type="button" data-base="street" id="btnStreet">Street</button>
+      <button type="button" data-base="hybrid" id="btnHybrid">Hybrid</button>
+      <button type="button" data-base="dark" id="btnDark" class="sec">Dark</button>
+      <button type="button" data-base="gibs" id="btnGibs" class="sec">NASA GIBS</button>
+      <button type="button" id="btnGlobal" class="sec">World</button>
+      <button type="button" id="btnMaine" class="sec">Maine</button>
+      <button type="button" id="btnHome">Home 04901</button>
+    </div>
+  </div>
+  <div style="position:relative;min-height:0">
+    <div id="map"></div>
+    <div class="hud">
+      <div><b id="hudTitle">Loading live map…</b></div>
+      <div class="meta" id="hudMeta">—</div>
+    </div>
+    <div class="legend">
+      <div><span class="dot" style="background:#34d399"></span>Home / peer</div>
+      <div><span class="dot" style="background:#66ccff"></span>Satellites</div>
+      <div><span class="dot" style="background:#fbbf24"></span>Map markers</div>
+      <div><span class="dot" style="background:#ff4466"></span>Life / SAR</div>
+    </div>
+  </div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+  integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script>
+(function () {
+  const HOME = { lat: 44.5612083, lon: -69.6323149, name: "16 Kelsey · 04901" };
+  const MAINE = { lat: 44.552, lon: -69.632, zoom: 8 };
+  const WORLD = { lat: 20, lon: -30, zoom: 2 };
+
+  // Tile base: same origin (Vite proxies /tiles/*)
+  const T = {
+    sat: L.tileLayer("/tiles/sat/{z}/{y}/{x}", {
+      maxZoom: 19, attribution: "Esri World Imagery",
+      errorTileUrl: "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+    }),
+    street: L.tileLayer("/tiles/osm/{z}/{x}/{y}.png", {
+      maxZoom: 19, attribution: "© OpenStreetMap",
+    }),
+    dark: L.tileLayer("/tiles/dark/{z}/{x}/{y}", {
+      maxZoom: 19, attribution: "CARTO",
+    }),
+    labels: L.tileLayer("/tiles/labels/{z}/{y}/{x}", {
+      maxZoom: 19, opacity: 0.9, attribution: "Esri labels",
+    }),
+    gibs: null, // set after date
+  };
+
+  function gibsDate() {
+    // GIBS often lags 1 day
+    const d = new Date(Date.now() - 86400000);
+    return d.toISOString().slice(0, 10);
+  }
+  T.gibs = L.tileLayer(
+    "/tiles/gibs/" + gibsDate() + "/{z}/{y}/{x}.jpg",
+    { maxZoom: 9, attribution: "NASA GIBS VIIRS", maxNativeZoom: 9 }
+  );
+
+  const map = L.map("map", {
+    center: [WORLD.lat, WORLD.lon],
+    zoom: WORLD.zoom,
+    zoomControl: true,
+    worldCopyJump: true,
+    preferCanvas: true,
+  });
+
+  let base = T.sat;
+  let labelsOn = false;
+  base.addTo(map);
+
+  const satLayer = L.layerGroup().addTo(map);
+  const markLayer = L.layerGroup().addTo(map);
+  const homeIcon = L.divIcon({ className: "", html: '<div class="home-marker"></div>', iconSize: [14, 14], iconAnchor: [7, 7] });
+  const satIcon = L.divIcon({ className: "", html: '<div class="sat-marker"></div>', iconSize: [10, 10], iconAnchor: [5, 5] });
+
+  L.marker([HOME.lat, HOME.lon], { icon: homeIcon, title: HOME.name })
+    .addTo(markLayer)
+    .bindPopup("<b>" + HOME.name + "</b><br/>Command anchor");
+
+  function setBase(name) {
+    if (base) map.removeLayer(base);
+    if (labelsOn && map.hasLayer(T.labels)) map.removeLayer(T.labels);
+    labelsOn = false;
+    document.querySelectorAll(".btns button[data-base]").forEach((b) => b.classList.remove("active"));
+    const btn = document.querySelector('.btns button[data-base="' + name + '"]');
+    if (btn) btn.classList.add("active");
+
+    if (name === "sat") {
+      base = T.sat; base.addTo(map);
+      document.getElementById("hudTitle").textContent = "Live satellite (Esri World Imagery)";
+    } else if (name === "street") {
+      base = T.street; base.addTo(map);
+      document.getElementById("hudTitle").textContent = "Street map (OpenStreetMap)";
+    } else if (name === "hybrid") {
+      base = T.sat; base.addTo(map);
+      T.labels.addTo(map); labelsOn = true;
+      document.getElementById("hudTitle").textContent = "Hybrid · sat + labels";
+    } else if (name === "dark") {
+      base = T.dark; base.addTo(map);
+      document.getElementById("hudTitle").textContent = "Tactical dark basemap";
+    } else if (name === "gibs") {
+      base = T.gibs; base.addTo(map);
+      document.getElementById("hudTitle").textContent = "NASA GIBS true-color · " + gibsDate();
+    }
+    document.getElementById("pillTiles").textContent = "base: " + name;
+    document.getElementById("pillTiles").classList.add("live");
+  }
+
+  document.querySelectorAll(".btns button[data-base]").forEach((btn) => {
+    btn.addEventListener("click", () => setBase(btn.getAttribute("data-base")));
+  });
+  document.getElementById("btnGlobal").onclick = () => map.setView([WORLD.lat, WORLD.lon], WORLD.zoom);
+  document.getElementById("btnMaine").onclick = () => map.setView([MAINE.lat, MAINE.lon], MAINE.zoom);
+  document.getElementById("btnHome").onclick = () => map.setView([HOME.lat, HOME.lon], 16);
+
+  // Prove tiles load
+  const testImg = new Image();
+  testImg.onload = () => {
+    document.getElementById("pillTiles").textContent = "tiles OK";
+    document.getElementById("pillTiles").classList.add("live");
+  };
+  testImg.onerror = () => {
+    document.getElementById("pillTiles").textContent = "tiles FAIL";
+    document.getElementById("pillTiles").classList.add("warn");
+    document.getElementById("pillLive").textContent = "TILE ERR";
+    document.getElementById("pillLive").classList.remove("live");
+    document.getElementById("pillLive").classList.add("warn");
+  };
+  testImg.src = "/tiles/sat/2/1/1?" + Date.now();
+
+  // Satellite catalog (client prop) — always moving
+  const CATALOG = [
+    { id: "iss", name: "ISS", alt: 420, inc: 51.6, period: 92.9, phase: 0.0 },
+    { id: "s2a", name: "Sentinel-2A", alt: 786, inc: 98.5, period: 100.6, phase: 0.2 },
+    { id: "s2b", name: "Sentinel-2B", alt: 786, inc: 98.5, period: 100.6, phase: 0.7 },
+    { id: "l9", name: "Landsat-9", alt: 705, inc: 98.2, period: 98.9, phase: 0.45 },
+    { id: "n20", name: "NOAA-20", alt: 824, inc: 98.7, period: 101.0, phase: 0.55 },
+    { id: "wv3", name: "WorldView-3", alt: 617, inc: 97.9, period: 97.0, phase: 0.8 },
+    { id: "sl", name: "Starlink Maine", alt: 550, inc: 53.0, period: 95.5, phase: 0.15 },
+    { id: "goes", name: "GOES-16", alt: 35786, inc: 0, period: 1436, phase: 0, geo: -75.2 },
+  ];
+  const t0 = Date.now() / 1000;
+  const satMarkers = {};
+
+  function satPos(s, t) {
+    if (s.geo != null) return [0, s.geo];
+    const periodS = s.period * 60;
+    const phase = (t / periodS + s.phase) % 1;
+    const inc = (s.inc * Math.PI) / 180;
+    let lon = (phase * 360 - 180) % 360;
+    if (lon > 180) lon -= 360;
+    let lat = (Math.asin(Math.sin(inc) * Math.sin(phase * 2 * Math.PI)) * 180) / Math.PI;
+    lon += (Math.atan2(Math.cos(inc) * Math.sin(phase * 2 * Math.PI), Math.cos(phase * 2 * Math.PI)) * 180) / Math.PI * 0.3;
+    if (lon > 180) lon -= 360;
+    if (lon < -180) lon += 360;
+    return [lat, lon];
+  }
+
+  function tickSats() {
+    const t = Date.now() / 1000 - t0 + t0; // wall time
+    const now = Date.now() / 1000;
+    satLayer.clearLayers();
+    CATALOG.forEach((s) => {
+      const [lat, lon] = satPos(s, now);
+      L.marker([lat, lon], { icon: satIcon, title: s.name })
+        .addTo(satLayer)
+        .bindPopup("<b>" + s.name + "</b><br/>alt " + s.alt + " km<br/>" + lat.toFixed(2) + ", " + lon.toFixed(2));
+    });
+    document.getElementById("pillSats").textContent = "sats " + CATALOG.length;
+    document.getElementById("pillSats").classList.add("live");
+  }
+  tickSats();
+  setInterval(tickSats, 2000);
+
+  // Map markers from defense API (via vite proxy)
+  async function pullMap() {
+    const urls = [
+      "/gods-eye-api/api/map",
+      "http://127.0.0.1:8787/api/map",
+      "http://100.95.99.98:8787/api/map",
+      "http://100.115.92.201:8787/api/map",
+    ];
+    for (const u of urls) {
+      try {
+        const r = await fetch(u + (u.includes("?") ? "&" : "?") + "t=" + Date.now(), { cache: "no-store" });
+        if (!r.ok) continue;
+        const j = await r.json();
+        const markers = j.markers || [];
+        markLayer.clearLayers();
+        L.marker([HOME.lat, HOME.lon], { icon: homeIcon }).addTo(markLayer).bindPopup("<b>" + HOME.name + "</b>");
+        markers.forEach((m) => {
+          if (m.lat == null || m.lon == null) return;
+          const color = m.color || "#fbbf24";
+          const icon = L.divIcon({
+            className: "",
+            html: '<div style="width:10px;height:10px;border-radius:50%;background:' + color + ';border:1px solid #fff;box-shadow:0 0 6px ' + color + '"></div>',
+            iconSize: [10, 10], iconAnchor: [5, 5],
+          });
+          L.marker([m.lat, m.lon], { icon })
+            .addTo(markLayer)
+            .bindPopup("<b>" + (m.label || m.id || m.kind || "marker") + "</b><br/>" + (m.kind || ""));
+        });
+        document.getElementById("pillMarks").textContent = "markers " + markers.length;
+        document.getElementById("pillMarks").classList.add("live");
+        document.getElementById("hudMeta").textContent =
+          "center " + (j.center ? j.center.lat + "," + j.center.lon : "—") +
+          " · layers on · " + new Date().toISOString().slice(11, 19) + "Z";
+        return;
+      } catch (_) {}
+    }
+    document.getElementById("pillMarks").textContent = "markers local";
+  }
+  pullMap();
+  setInterval(pullMap, 8000);
+
+  // Travel track · YOU + automotive RF/apps + frequency peaks
+  const travelLayer = L.layerGroup().addTo(map);
+  let trailLine = null;
+  async function pullTravel() {
+    const urls = [
+      "/travel-live.json",
+      "http://127.0.0.1:5173/travel-live.json",
+      "http://100.95.99.98:5173/travel-live.json",
+      "http://100.115.92.201:5173/travel-live.json",
+      "http://127.0.0.1:8787/travel-live.json",
+    ];
+    for (const u of urls) {
+      try {
+        const r = await fetch(u + (u.includes("?") ? "&" : "?") + "t=" + Date.now(), { cache: "no-store" });
+        if (!r.ok) continue;
+        const j = await r.json();
+        if (!j || !j.live) continue;
+        travelLayer.clearLayers();
+        const op = j.operator || {};
+        if (op.lat != null && op.lon != null) {
+          const you = L.divIcon({
+            className: "",
+            html: '<div style="width:16px;height:16px;border-radius:50%;background:#34d399;border:2px solid #fff;box-shadow:0 0 14px #34d399"></div>',
+            iconSize: [16, 16], iconAnchor: [8, 8],
+          });
+          L.marker([op.lat, op.lon], { icon: you, zIndexOffset: 1000 })
+            .addTo(travelLayer)
+            .bindPopup("<b>YOU · travel</b><br/>" + (op.source || "") + "<br/>motion " + (op.motion || "—"));
+        }
+        (j.automotive || []).forEach((a) => {
+          if (a.lat == null) return;
+          const col = a.color || "#fbbf24";
+          const ic = L.divIcon({
+            className: "",
+            html: '<div style="width:11px;height:11px;border-radius:3px;background:' + col + ';border:1px solid #fff;box-shadow:0 0 6px ' + col + '"></div>',
+            iconSize: [11, 11], iconAnchor: [5, 5],
+          });
+          L.marker([a.lat, a.lon], { icon: ic })
+            .addTo(travelLayer)
+            .bindPopup(
+              "<b>" + (a.name || a.label) + "</b><br/>" +
+              (a.kind || "") + " · " + (a.band || "") + "<br/>" +
+              (a.freq_mhz || "") + " MHz · RSSI " + (a.rssi_dbm || "—") + " dBm"
+            );
+        });
+        const trail = (j.trail || []).map((p) => [p.lat, p.lon]).filter((p) => p[0] != null);
+        if (trailLine) { try { map.removeLayer(trailLine); } catch (_) {} }
+        if (trail.length >= 2) {
+          trailLine = L.polyline(trail, { color: "#34d399", weight: 3, opacity: 0.75 }).addTo(map);
+        }
+        const peaks = (j.frequency_peaks || []).slice(0, 6).map((f) => f.freq_mhz + " MHz").join(", ");
+        document.getElementById("pillMarks").textContent =
+          "cars " + (j.auto_count || 0) + " · peaks " + (j.frequency_peaks || []).length;
+        document.getElementById("pillMarks").classList.add("live");
+        document.getElementById("hudMeta").textContent =
+          "YOU " + (op.lat || "—") + "," + (op.lon || "—") +
+          " · autos " + (j.auto_count || 0) +
+          " · RF peaks: " + (peaks || "—") +
+          " · " + new Date().toISOString().slice(11, 19) + "Z";
+        // Follow you when traveling
+        if (op.lat != null && map.getZoom() >= 10) {
+          map.panTo([op.lat, op.lon], { animate: true });
+        }
+        return;
+      } catch (_) {}
+    }
+  }
+  pullTravel();
+  setInterval(pullTravel, 4000);
+
+  // Default: show world sat, then ease to Maine so user sees imagery
+  setBase("sat");
+  setTimeout(() => map.setView([MAINE.lat, MAINE.lon], 12), 600);
+
+  document.getElementById("hudTitle").textContent = "Live satellite · track · cars · RF";
+  document.getElementById("hudMeta").textContent = "Sat · Street · Hybrid · NASA GIBS · travel track";
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,267 @@
+{
+  "type": "all_worlds_live",
+  "version": "7.2.1",
+  "status": "LIVE",
+  "ts": 1784680750.9950519,
+  "iso": "2026-07-22T00:39:10.994965+00:00",
+  "engines_ip": "100.95.99.98",
+  "crostini_ip": "100.115.92.201",
+  "all_layers_on": true,
+  "all_worlds": true,
+  "sensor_layers": {
+    "rf": true,
+    "thermal": true,
+    "life": true,
+    "defense": true,
+    "sar": true,
+    "spectrum": true,
+    "lattice": true,
+    "paint": true,
+    "photos": true,
+    "airport": true,
+    "satellite": true,
+    "power": true,
+    "nasa": true,
+    "god_mode": true,
+    "energy": true,
+    "military": true,
+    "fleet": true,
+    "map": true,
+    "neural": true,
+    "mesh": true,
+    "air": true,
+    "trains": true,
+    "missiles": true,
+    "orbital": true,
+    "space": true,
+    "celestial": true,
+    "llm": true,
+    "bridge": true,
+    "devices": true,
+    "quest": true,
+    "pixel": true,
+    "ar_vr": true,
+    "manifests": true,
+    "public_channels": true,
+    "rail": true,
+    "global": true,
+    "deep_learning": true,
+    "world_nodes": true,
+    "godmode": true,
+    "aether": true,
+    "digital_twin": true,
+    "mapping": true,
+    "military_fleet": true,
+    "god": true
+  },
+  "feed_switches": {
+    "rf": true,
+    "thermal": true,
+    "life": true,
+    "defense": true,
+    "sar": true,
+    "spectrum": true,
+    "lattice": true,
+    "paint": true,
+    "photos": true,
+    "airport": true,
+    "satellite": true,
+    "power": true,
+    "nasa": true,
+    "god_mode": true,
+    "energy": true,
+    "military": true,
+    "fleet": true,
+    "map": true,
+    "neural": true,
+    "mesh": true,
+    "air": true,
+    "trains": true,
+    "missiles": true,
+    "orbital": true,
+    "space": true,
+    "celestial": true,
+    "llm": true,
+    "bridge": true,
+    "devices": true,
+    "quest": true,
+    "pixel": true,
+    "ar_vr": true,
+    "manifests": true,
+    "public_channels": true,
+    "rail": true,
+    "global": true,
+    "deep_learning": true,
+    "world_nodes": true,
+    "godmode": true,
+    "aether": true,
+    "digital_twin": true,
+    "mapping": true,
+    "military_fleet": true,
+    "god": true
+  },
+  "world_nodes": {
+    "live": true,
+    "count": 436,
+    "by_kind": {
+      "neural": 214,
+      "city": 60,
+      "town": 64,
+      "defense_radar": 5,
+      "defense_bases": 17,
+      "defense_sam": 4,
+      "defense_naval": 10,
+      "defense_cyber": 3,
+      "defense_chokepoint": 5,
+      "defense_airport": 54
+    },
+    "engine": "sovereign-world-nodes-live",
+    "path": "/dev/shm/sovereign_world_nodes.json"
+  },
+  "map": {
+    "markers": null,
+    "center": null
+  },
+  "paint": {
+    "devices": 29,
+    "active": 27,
+    "life": 11
+  },
+  "god_mode": {
+    "active": true,
+    "persona": "fire_rescue"
+  },
+  "deep_learning": {
+    "live": true,
+    "ollama_ok": true,
+    "models": [
+      "tinyllama:latest",
+      "qwen2.5-coder:3b",
+      "qwen2.5-coder:7b",
+      "qwen3:30b",
+      "nomic-embed-text:latest"
+    ]
+  },
+  "live_sources": [
+    "defense",
+    "earth",
+    "location_paint",
+    "god_mode",
+    "airport",
+    "energy",
+    "military_fleet",
+    "mapping",
+    "photos",
+    "llm",
+    "bridge_mesh",
+    "manifests",
+    "public_channels",
+    "missiles",
+    "satellite",
+    "neural",
+    "mesh",
+    "trains"
+  ],
+  "surfaces": {
+    "gateway": "http://100.115.92.201:43000/",
+    "eye": "http://100.115.92.201:8787/a/gUv6muuqxC5iqD5qg0sr0e1Il3s6LxM0/eye",
+    "earth": "http://100.115.92.201:5173/gods-eye.html",
+    "map": "http://100.115.92.201:8787/map",
+    "paint": "http://100.115.92.201:8765/location_paint",
+    "god_mode_paint": "http://100.115.92.201:8765/god_mode",
+    "godmode_demo": "http://100.115.92.201:8771/",
+    "aether": "http://100.115.92.201:42421/",
+    "digital_twin": "http://100.115.92.201:5174/",
+    "command": "http://100.115.92.201:5090/",
+    "mesh": "http://100.115.92.201:42426/",
+    "live_api": "http://100.95.99.98:8787/api/live",
+    "map_api": "http://100.95.99.98:8787/api/map",
+    "deep_learning": "http://100.95.99.98:8787/api/deep-learning/status",
+    "platform": "http://100.95.99.98:8787/api/platform",
+    "pixel_eye": "http://100.95.99.98:8787/a/gUv6muuqxC5iqD5qg0sr0e1Il3s6LxM0/eye"
+  },
+  "probe": {
+    "gateway": {
+      "url": "http://100.115.92.201:43000/",
+      "http": 200,
+      "ok": true
+    },
+    "eye": {
+      "url": "http://100.115.92.201:8787/a/gUv6muuqxC5iqD5qg0sr0e1Il3s6LxM0/eye",
+      "http": 200,
+      "ok": true
+    },
+    "earth": {
+      "url": "http://100.115.92.201:5173/gods-eye.html",
+      "http": 200,
+      "ok": true
+    },
+    "map": {
+      "url": "http://100.115.92.201:8787/map",
+      "http": 200,
+      "ok": true
+    },
+    "paint": {
+      "url": "http://100.115.92.201:8765/location_paint",
+      "http": 200,
+      "ok": true
+    },
+    "god_mode_paint": {
+      "url": "http://100.115.92.201:8765/god_mode",
+      "http": 200,
+      "ok": true
+    },
+    "godmode_demo": {
+      "url": "http://100.115.92.201:8771/",
+      "http": 200,
+      "ok": true
+    },
+    "aether": {
+      "url": "http://100.115.92.201:42421/",
+      "http": 0,
+      "ok": false
+    },
+    "digital_twin": {
+      "url": "http://100.115.92.201:5174/",
+      "http": 200,
+      "ok": true
+    },
+    "command": {
+      "url": "http://100.115.92.201:5090/",
+      "http": 200,
+      "ok": true
+    },
+    "mesh": {
+      "url": "http://100.115.92.201:42426/",
+      "http": 200,
+      "ok": true
+    },
+    "live_api": {
+      "url": "http://100.95.99.98:8787/api/live",
+      "http": 200,
+      "ok": true
+    },
+    "map_api": {
+      "url": "http://100.95.99.98:8787/api/map",
+      "http": 0,
+      "ok": false
+    },
+    "deep_learning": {
+      "url": "http://100.95.99.98:8787/api/deep-learning/status",
+      "http": 200,
+      "ok": true
+    },
+    "platform": {
+      "url": "http://100.95.99.98:8787/api/platform",
+      "http": 200,
+      "ok": true
+    },
+    "pixel_eye": {
+      "url": "http://100.95.99.98:8787/a/gUv6muuqxC5iqD5qg0sr0e1Il3s6LxM0/eye",
+      "http": 200,
+      "ok": true
+    }
+  },
+  "live_surface_count": 14,
+  "live_surface_total": 16
+}

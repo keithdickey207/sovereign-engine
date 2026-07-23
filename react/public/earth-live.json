@@ -1,43 +1,92 @@
 {
   "type": "earth_live_overview",
   "status": "LIVE",
+  "version": "7.2.1-red-laptop-failover",
+  "updated_at": "2026-07-20T23:55:02.250934+00:00",
   "hub": "100.125.221.112",
+  "hub_online": false,
+  "live_peer": {
+    "name": "keithdickey207-1",
+    "role": "linux_peer_cop",
+    "label": "Red Laptop",
+    "crostini_ip": "100.115.92.201",
+    "tailscale_ip": "100.95.99.98",
+    "primary": true
+  },
   "earth": {
     "live": true,
     "gods_eye_http": 200,
     "paint_live": true,
     "device_count": 29,
-    "active_count": 26,
+    "active_count": 21,
     "building": "16 Kelsey Street \u2014 Home Lab",
     "lat": 44.5612083,
     "lon": -69.6323149,
     "own_wire": "ok",
     "own_wire_version": "7.2-own",
     "defense": "ok",
-    "mesh_bridge": "mesh_bridge"
+    "map_markers": 42,
+    "mesh_bridge": "mesh_bridge",
+    "pixel_10": true
   },
   "urls": {
-    "gods_eye": "http://100.125.221.112:5173/gods-eye.html",
-    "earth": "http://100.125.221.112:5173/",
-    "interconnect": "http://100.125.221.112:5173/interconnect.html",
-    "mesh_live": "http://100.125.221.112:5173/mesh-live.json",
-    "own_wire_paint": "http://100.125.221.112:8765/location_paint",
-    "own_wire_health": "http://100.125.221.112:8765/health",
-    "mesh_bridge": "http://100.125.221.112:8767/status",
-    "defense": "http://100.125.221.112:8787/health",
-    "command_hub": "http://100.125.221.112:5090/"
+    "gods_eye": "http://100.115.92.201:5173/gods-eye.html",
+    "earth": "http://100.115.92.201:5173/",
+    "mesh_live": "http://100.115.92.201:5173/mesh-live.json",
+    "own_wire_paint": "http://100.115.92.201:8765/location_paint",
+    "own_wire_health": "http://100.115.92.201:8765/health",
+    "own_wire_god": "http://100.115.92.201:8765/god_mode",
+    "defense": "http://100.115.92.201:8787/health",
+    "eye": "http://100.115.92.201:8787/a/gUv6muuqxC5iqD5qg0sr0e1Il3s6LxM0/eye",
+    "quest": "http://100.115.92.201:8787/a/gUv6muuqxC5iqD5qg0sr0e1Il3s6LxM0/quest",
+    "command_hub": "http://100.115.92.201:5090/",
+    "gateway": "http://100.115.92.201:43000/"
   },
   "urls_gateway": {
-    "gods_eye": "http://127.0.0.1:43173/gods-eye.html",
-    "earth": "http://127.0.0.1:43173/",
-    "interconnect": "http://127.0.0.1:43173/interconnect.html",
-    "mesh_live": "http://127.0.0.1:43173/mesh-live.json",
-    "own_wire_paint": "http://127.0.0.1:48765/location_paint",
-    "own_wire_health": "http://127.0.0.1:48765/health",
-    "mesh_bridge": "http://127.0.0.1:48767/status",
-    "defense": "http://127.0.0.1:48787/health",
-    "command_hub": "http://127.0.0.1:45090/",
-    "gateway": "http://127.0.0.1:43000/"
+    "gods_eye": "http://100.115.92.201:43173/gods-eye.html",
+    "earth": "http://100.115.92.201:43173/",
+    "own_wire_paint": "http://100.115.92.201:48765/location_paint",
+    "own_wire_health": "http://100.115.92.201:48765/health",
+    "own_wire_god": "http://100.115.92.201:48765/god_mode",
+    "defense": "http://100.115.92.201:48787/health",
+    "map": "http://100.115.92.201:48787/api/map",
+    "command_hub": "http://100.115.92.201:45090/",
+    "gateway": "http://100.115.92.201:43000/"
   },
-  "updated_at": "2026-07-16T16:07:58.119776+00:00"
+  "urls_hub_desktop": {
+    "gods_eye": "http://100.125.221.112:5173/gods-eye.html",
+    "earth": "http://100.125.221.112:5173/",
+    "defense": "http://100.125.221.112:8787/health",
+    "note": "Dell OptiPlex \u2014 offline until Tailscale reconnects"
+  },
+  "pixel_10": {
+    "name": "pixel-10",
+    "tailscale_ip": "100.64.22.60",
+    "online": true,
+    "urls": {
+      "eye": "http://100.95.99.98:8787/a/gUv6muuqxC5iqD5qg0sr0e1Il3s6LxM0/eye",
+      "earth": "http://100.95.99.98:5173/gods-eye.html",
+      "gateway": "http://100.95.99.98:43000/",
+      "quest": "http://100.95.99.98:8787/a/gUv6muuqxC5iqD5qg0sr0e1Il3s6LxM0/quest"
+    }
+  },
+  "sensor_layers": {
+    "rf": true,
+    "thermal": true,
+    "life": true,
+    "defense": true,
+    "sar": true,
+    "spectrum": true,
+    "lattice": true,
+    "paint": true,
+    "photos": true,
+    "airport": true,
+    "satellite": true,
+    "power": true,
+    "nasa": true,
+    "god_mode": true,
+    "map": true,
+    "ar": true,
+    "vr": true
+  }
 }
